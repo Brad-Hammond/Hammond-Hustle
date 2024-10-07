@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+<h2>Manage Bookings</h2>
+
+{% if request.user.groups.filter(name="Users").exists %}
+<p>Your bookings:</p>
+<ul>
+  {% for booking in bookings %}
+  <li>
+    {{ booking.session_time }} - {{ booking.status }} {% if booking.feedback %}
+    <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% elif request.user.groups.filter(name="Employees").exists %}
+<p>All bookings (Employee view):</p>
+<ul>
+  {% for booking in bookings %}
+  <li>
+    {{ booking.session_time }} - {{ booking.status }} {% if booking.status ==
+    "Accepted" %}
+    <a href="{% url 'leave_feedback' booking.id %}">Leave Feedback</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% elif request.user.groups.filter(name="Admin").exists %}
+<p>All bookings (Admin view):</p>
+<ul>
+  {% for booking in bookings %}
+  <li>
+    {{ booking.session_time }} - {{ booking.status }} {% if booking.feedback %}
+    <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %} {% endblock %}
