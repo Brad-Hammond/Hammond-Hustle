@@ -14,10 +14,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
 
-            
+            # Get the code from the form
             code = form.cleaned_data.get('code')
 
-            
+            # Check the code and assign the user to the appropriate group
             if code == 'EMPLOYEE2024':
                 employee_group = Group.objects.get(name='Employee')
                 user.groups.add(employee_group)
@@ -25,7 +25,7 @@ def signup(request):
                 user_group = Group.objects.get(name='User')
                 user.groups.add(user_group)
 
-            
+            # Log the user in and redirect them
             login(request, user)
             return redirect('home')
     else:
