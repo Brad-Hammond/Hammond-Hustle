@@ -102,3 +102,15 @@ def leave_feedback(request, booking_id):
         form = FeedbackForm(instance=booking)
 
     return render(request, 'bookings/leave_feedback.html', {'form': form, 'booking': booking})
+
+# View for users to view feedback on their booking
+@login_required
+def view_feedback(request, booking_id):
+    """
+    Allows users to view feedback left by an employee on their booking.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+    if booking.user != request.user:
+        return redirect('manage_bookings')
+
+    return render(request, 'bookings/view_feedback.html', {'booking': booking})
