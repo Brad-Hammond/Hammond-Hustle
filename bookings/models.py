@@ -10,9 +10,9 @@ class Booking(models.Model):
         ('Rejected', 'Rejected'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
-    booking_date = models.DateTimeField()  
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    session_time = models.DateTimeField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')  
     feedback = models.TextField(blank=True, null=True)  
 
     def __str__(self):
