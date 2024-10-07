@@ -1,11 +1,16 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm  # Import for signup
 from .models import Booking
 from .forms import BookingForm, FeedbackForm, CustomUserCreationForm
 
 # Create your views here.
+
+@login_required
+def booking_page(request):
+    return render(request, 'booking.html')
 
 # View to render base.html for the home/root URL
 def home(request):
@@ -45,7 +50,7 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})
 
 @login_required
 def manage_bookings(request):
