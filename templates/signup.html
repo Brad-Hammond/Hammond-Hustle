@@ -12,28 +12,33 @@
   <body>
     <header>
       <div class="logo">
-        <h1>FENRIZ</h1>
+        <h1>Hammond Hustle</h1>
       </div>
       <nav>
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Trainers</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </nav>
     </header>
-
-    <section class="form-section">
-      <h2>Signup</h2>
-      <form method="POST" action="{% url 'signup' %}">
-        {% csrf_token %} {{ form.as_p }}
-        <!-- Renders the signup form fields -->
-        <button type="submit" class="btn">Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <a href="{% url 'login' %}">Log in here</a>.
-      </p>
-    </section>
+    <div id="color-black">
+      <section class="form-section">
+        <h2>Signup</h2>
+        <form method="POST" action="{% url 'signup' %}">
+          {% csrf_token %} {{ form.as_p }}
+          <!-- Renders the signup form fields -->
+          <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>
+          Already have an account? <a href="{% url 'login' %}">Log in here</a>.
+        </p>
+      </section>
+    </div>
   </body>
 </html>
