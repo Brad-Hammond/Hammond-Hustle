@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from bookings import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookings/', include('bookings.urls')),
+    path('', views.home, name='home'),  # Root URL redirects to the home view, rendering base.html
 ]
