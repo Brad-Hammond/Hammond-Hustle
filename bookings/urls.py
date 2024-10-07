@@ -11,7 +11,7 @@ urlpatterns = [
     path('view_feedback/<int:booking_id>/', views.view_feedback, name='view_feedback'),
 
     # Authentication-related URLs
-    path('signup/', views.signup, name='signup'),  # Signup URL
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),  # Login URL
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Logout URL
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # Login view
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Logout view
+    path('signup/', views.signup, name='signup'),  # Signup view
 ]
