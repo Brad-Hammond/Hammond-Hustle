@@ -7,6 +7,15 @@ from .forms import BookingForm, FeedbackForm, CustomUserCreationForm
 
 # Create your views here.
 
+# View to render base.html for the home/root URL
+def home(request):
+    # Check if the user is authenticated and belongs to the "Users" group
+    is_user = False
+    if request.user.is_authenticated and request.user.groups.filter(name='Users').exists():
+        is_user = True
+    
+    return render(request, 'base.html', {'is_user': is_user})
+
 # View for user signup
 def signup(request):
     '''
