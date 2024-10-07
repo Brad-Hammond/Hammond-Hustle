@@ -81,3 +81,24 @@ def accept_booking(request, booking_id):
     booking.status = 'Accepted'
     booking.save()
     return redirect('manage_bookings')
+
+# View for employees to leave feedback for an accepted booking
+@login_required
+@permission_required('bookings.can_accept_booking', raise_exception=True)
+def leave_feedback(request, booking_id):
+    """
+    Allows employees to leave feedback for a booking if it has been accepted.
+    """
+    booking = get_object_or_404(Booking, id=booking_id) 
+    if booking.status != 'Accepted':
+        return redirect('manage_bookings')
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save() 
+            return redirect('manage_bookings')
+    else:
+        form = FeedbackForm(instance=booking)
+
+    return render(request, 'bookings/leave_feedback.html', {'form': form, 'booking': booking})
