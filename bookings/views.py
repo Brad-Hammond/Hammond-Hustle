@@ -69,3 +69,15 @@ def create_booking(request):
         form = BookingForm()
 
     return render(request, 'bookings/create_booking.html', {'form': form})
+
+# View for employees/admins to accept a booking
+@login_required
+@permission_required('bookings.can_accept_booking', raise_exception=True)
+def accept_booking(request, booking_id):
+    """
+    Allows employees or admins to accept a booking, changing its status to 'Accepted'.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.status = 'Accepted'
+    booking.save()
+    return redirect('manage_bookings')
