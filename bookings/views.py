@@ -49,3 +49,23 @@ def manage_bookings(request):
     elif request.user.groups.filter(name='Employees').exists() or request.user.groups.filter(name='Admin').exists():
         bookings = Booking.objects.all()
     return render(request, 'bookings/manage_bookings.html', {'bookings': bookings})
+
+# View for creating a booking
+@login_required
+def create_booking(request):
+    """
+    Allows users to create a new booking. Once submitted,
+    the booking is saved with 'Pending' status.
+    """
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.status = 'Pending'
+            booking.save()
+            return redirect('manage_bookings') 
+    else:
+        form = BookingForm()
+
+    return render(request, 'bookings/create_booking.html', {'form': form})
