@@ -1,38 +1,43 @@
-{% extends "base.html" %} {% block content %}
-<h2>Manage Bookings</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Hammond Hustle</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'create_booking' %}">Make a Booking</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
 
-{% if request.user.groups.filter(name="Users").exists %}
-<p>Your bookings:</p>
-<ul>
-  {% for booking in bookings %}
-  <li>
-    {{ booking.session_time }} - {{ booking.status }} {% if booking.feedback %}
-    <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% elif request.user.groups.filter(name="Employees").exists %}
-<p>All bookings (Employee view):</p>
-<ul>
-  {% for booking in bookings %}
-  <li>
-    {{ booking.session_time }} - {{ booking.status }} {% if booking.status ==
-    "Accepted" %}
-    <a href="{% url 'leave_feedback' booking.id %}">Leave Feedback</a>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% elif request.user.groups.filter(name="Admin").exists %}
-<p>All bookings (Admin view):</p>
-<ul>
-  {% for booking in bookings %}
-  <li>
-    {{ booking.session_time }} - {{ booking.status }} {% if booking.feedback %}
-    <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %} {% endblock %}
+    <section class="manage-bookings-section">
+        <h2>Your Bookings</h2>
+
+        {% if bookings %}
+            <ul>
+                {% for booking in bookings %}
+                    <li>
+                        Session: {{ booking.session_time }} - Status: {{ booking.status }}
+                        {% if booking.feedback %}
+                            - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have no current bookings.</p>
+        {% endif %}
+    </section>
+</body>
+</html>
