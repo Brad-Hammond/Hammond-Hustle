@@ -60,33 +60,30 @@ def signup(request):
 @login_required
 def manage_bookings(request):
     is_user = request.user.groups.filter(name="Users").exists()
+    is_employee = request.user.groups.filter(name="Employees").exists()  # Unified to "Employees" group
     is_admin = request.user.groups.filter(name="Admin").exists()
-    is_employee = request.user.groups.filter(name="Employees").exists()
 
     if is_user:
         # Users see only their own bookings
         bookings = Booking.objects.filter(user=request.user)
-        pending_bookings, approved_bookings = None, None  # Hide these sections for users
     elif is_employee:
-        # Coaches see only their assigned bookings, split into pending and approved
-        assigned_coach_name = request.user.get_full_name()
+        # Employees/coaches see only bookings assigned to them
+        assigned_coach_name = request.user.get_full_name()  # Using full name as identifier for assigned coach
         pending_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Pending")
         approved_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Approved")
-        bookings = None  # Coaches don’t need to see all bookings in one list
     elif is_admin:
         # Admins see all bookings
         bookings = Booking.objects.all()
-        pending_bookings, approved_bookings = None, None
     else:
-        bookings, pending_bookings, approved_bookings = [], None, None
+        bookings = []
 
     return render(request, 'bookings/manage_bookings.html', {
-        'bookings': bookings,
-        'pending_bookings': pending_bookings,
-        'approved_bookings': approved_bookings,
+        'bookings': bookings if is_user or is_admin else None,
+        'pending_bookings': pending_bookings if is_employee else None,
+        'approved_bookings': approved_bookings if is_employee else None,
         'is_user': is_user,
-        'is_admin': is_admin,
         'is_employee': is_employee,
+        'is_admin': is_admin,
     })
 
 
@@ -196,17 +193,13 @@ def delete_booking(request, booking_id):
 @permission_required('bookings.can_accept_booking', raise_exception=True)
 def approve_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
-
-    # Ensure only the assigned coach can approve
+    # Allow any employee to approve bookings where they match as coach
     if booking.coach != request.user.get_full_name():
         return redirect('manage_bookings')
 
     if request.method == 'POST':
         action = request.POST.get('action')
-        if action == 'approve':
-            booking.status = 'Approved'
-        elif action == 'reject':
-            booking.status = 'Rejected'
+        booking.status = 'Approved' if action == 'approve' else 'Rejected'
         booking.save()
         return redirect('manage_bookings')
     
