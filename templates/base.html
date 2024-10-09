@@ -36,7 +36,13 @@
           results. Book a session with one of our expert trainers and take the
           first step toward reaching your fitness goals!
         </p>
+        {% if user.is_authenticated %}
+        <!-- "Make Bookings" button only visible to authenticated users -->
+        <a href="{% url 'create_booking' %}" class="btn">MAKE A BOOKING</a>
+        {% else %}
+        <!-- Placeholder button for unauthenticated users -->
         <a href="#" class="btn">DISCOVER ALL CLASSES</a>
+        {% endif %}
       </div>
     </section>
   </body>
