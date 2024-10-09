@@ -1,8 +1,10 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import User, Group
-from django.contrib.auth.forms import UserCreationForm  # Import for signup
+from django.contrib.auth.models import Group
+from django.http import JsonResponse  # Import for JSON response if needed
+from django.utils.dateparse import parse_datetime  # Import if working with date parsing
+import json  # Import json module to handle JSON data
 from .models import Booking
 from .forms import BookingForm, FeedbackForm, CustomUserCreationForm
 
@@ -82,7 +84,16 @@ def create_booking(request):
     else:
         form = BookingForm()
 
-    return render(request, 'bookings/create_booking.html', {'form': form})
+
+ # Retrieve booked times for the selected coach
+    booked_times = Booking.objects.values_list('session_time', flat=True)
+    booked_times_list = [dt.strftime("%Y-%m-%dT%H:%M") for dt in booked_times]
+
+
+    return render(request, 'bookings/create_booking.html', {
+        'form': form,
+        'booked_times_json': json.dumps(booked_times_list)  # Pass booked times as JSON to the template
+    })
 
 @login_required
 def booking_confirmation(request, booking_id):
