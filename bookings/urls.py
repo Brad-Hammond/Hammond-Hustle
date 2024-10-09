@@ -10,6 +10,7 @@ urlpatterns = [
     path('leave_feedback/<int:booking_id>/', views.leave_feedback, name='leave_feedback'),
     path('view_feedback/<int:booking_id>/', views.view_feedback, name='view_feedback'),
     path('delete_booking/<int:booking_id>/', views.delete_booking, name='delete_booking'),
+    path('bookings/approve/<int:booking_id>/', views.approve_booking, name='approve_booking'),
 
     # Authentication-related URLs
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # Login view
