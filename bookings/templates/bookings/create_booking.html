@@ -7,7 +7,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    <!-- Load date and time picker library (for modern browsers) -->
+    <!-- Load date and time picker library -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css"
@@ -118,6 +118,9 @@
 
     <!-- Initialize flatpickr date and time picker -->
     <script>
+      // Parse the JSON data passed from Django
+      const bookedTimes = JSON.parse("{{ booked_times_json|escapejs }}");
+
       // Date picker for DOB (only date)
       flatpickr("#dob", {
         dateFormat: "F j, Y",
@@ -126,13 +129,14 @@
         altFormat: "F j, Y",
       });
 
-      // Date and time picker for Session Time
+      // Date and time picker for Session Time with disabled dates/times
       flatpickr("#session_time", {
         enableTime: true,
-        dateFormat: "F j, Y h:i K",
+        dateFormat: "Y-m-dTH:i",
         altInput: true,
         altFormat: "F j, Y h:i K",
-        minDate: "today", // Optional: Restrict to today and future dates
+        minDate: "today",
+        disable: bookedTimes.map((date) => date),
       });
     </script>
   </body>
