@@ -1,13 +1,13 @@
+# bookings/views.py
 from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
-from django.http import JsonResponse  # Import for JSON response if needed
-from django.utils.dateparse import parse_datetime  # Import if working with date parsing
-import json  # Import json module to handle JSON data
-from .models import Booking
-from .forms import BookingForm, FeedbackForm, CustomUserCreationForm
+from django.http import JsonResponse
+from django.utils.dateparse import parse_datetime
+import json
 from .models import Booking, Coach
+from .forms import BookingForm, FeedbackForm, CustomUserCreationForm  # Import your forms here
 
 # Create your views here.
 
@@ -59,33 +59,36 @@ def signup(request):
 
 @login_required
 def manage_bookings(request):
-    """
-    Displays a list of bookings based on the user's role:
-    - Users see their own bookings.
-    - Coaches see bookings where they are assigned as the coach.
-    - Admins see all bookings.
-    """
     is_user = request.user.groups.filter(name="Users").exists()
     is_admin = request.user.groups.filter(name="Admin").exists()
-    
+    is_employee = request.user.groups.filter(name="Employees").exists()
+
     if is_user:
-        # Users see only their bookings
+        # Users see only their own bookings
         bookings = Booking.objects.filter(user=request.user)
-    elif request.user.groups.filter(name="Employees").exists():
-        # Coaches see only bookings assigned to them
-        assigned_coach_name = request.user.username  # Assumes coach's name matches their username
-        bookings = Booking.objects.filter(coach=assigned_coach_name)
+        pending_bookings, approved_bookings = None, None  # Hide these sections for users
+    elif is_employee:
+        # Coaches see only their assigned bookings, split into pending and approved
+        assigned_coach_name = request.user.get_full_name()
+        pending_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Pending")
+        approved_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Approved")
+        bookings = None  # Coaches don’t need to see all bookings in one list
     elif is_admin:
         # Admins see all bookings
         bookings = Booking.objects.all()
+        pending_bookings, approved_bookings = None, None
     else:
-        bookings = []
+        bookings, pending_bookings, approved_bookings = [], None, None
 
     return render(request, 'bookings/manage_bookings.html', {
         'bookings': bookings,
+        'pending_bookings': pending_bookings,
+        'approved_bookings': approved_bookings,
         'is_user': is_user,
-        'is_admin': is_admin
+        'is_admin': is_admin,
+        'is_employee': is_employee,
     })
+
 
 # View for creating a booking
 @login_required
@@ -186,3 +189,25 @@ def delete_booking(request, booking_id):
     else:
         # Redirect with a message if unauthorized
         return redirect('manage_bookings')
+    
+    # bookings/views.py
+
+@login_required
+@permission_required('bookings.can_accept_booking', raise_exception=True)
+def approve_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+
+    # Ensure only the assigned coach can approve
+    if booking.coach != request.user.get_full_name():
+        return redirect('manage_bookings')
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'approve':
+            booking.status = 'Approved'
+        elif action == 'reject':
+            booking.status = 'Rejected'
+        booking.save()
+        return redirect('manage_bookings')
+    
+    return render(request, 'bookings/approve_booking.html', {'booking': booking})
