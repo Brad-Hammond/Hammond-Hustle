@@ -60,38 +60,52 @@ def manage_bookings(request):
     Displays a list of bookings. Users see only their bookings,
     while employees and admins see all bookings.
     """
-    if request.user.groups.filter(name='Users').exists():
-        bookings = Booking.objects.filter(user=request.user)
-    elif request.user.groups.filter(name='Employees').exists() or request.user.groups.filter(name='Admin').exists():
-        bookings = Booking.objects.all()
-    return render(request, 'bookings/manage_bookings.html', {'bookings': bookings})
+    # Check if the user belongs to the "Users" group
+    is_user = request.user.groups.filter(name="Users").exists()
+
+    # Retrieve bookings based on the user’s group
+    if is_user:
+        bookings = Booking.objects.filter(user=request.user)  # Users see only their own bookings
+    elif request.user.groups.filter(name__in=['Employees', 'Admin']).exists():
+        bookings = Booking.objects.all()  # Employees and Admins see all bookings
+    else:
+        bookings = []  # If the user is not in any group, no bookings are shown
+
+    # Render the manage_bookings template with the bookings data
+    return render(request, 'bookings/manage_bookings.html', {
+        'bookings': bookings,
+        'is_user': is_user,  # Pass user group info for conditional display in the template
+    })
 
 # View for creating a booking
 @login_required
 def create_booking(request):
     """
     Allows users to create a new booking. Once submitted,
-    the booking is saved with 'Pending' status.
+    the booking is saved with 'Pending' status. Displays a list
+    of existing bookings and disables already booked times.
     """
-    if request.method == 'POST':
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            booking = form.save(commit=False)
-            booking.user = request.user
-            booking.status = 'Pending'
-            booking.save()
-            return redirect('manage_bookings') 
-    else:
-        form = BookingForm()
+    form = BookingForm(request.POST or None)
 
+    # Handle form submission
+    if request.method == 'POST' and form.is_valid():
+        booking = form.save(commit=False)
+        booking.user = request.user  # Associate booking with logged-in user
+        booking.status = 'Pending'
+        booking.save()
+        return redirect('manage_bookings')  # Redirect to manage bookings after saving
 
- # Retrieve booked times for the selected coach
+    # Retrieve existing bookings for the user
+    existing_bookings = Booking.objects.filter(user=request.user)
+
+    # Retrieve booked times across all bookings to disable in the form
     booked_times = Booking.objects.values_list('session_time', flat=True)
     booked_times_list = [dt.strftime("%Y-%m-%dT%H:%M") for dt in booked_times]
 
-
+    # Render the form with existing bookings
     return render(request, 'bookings/create_booking.html', {
         'form': form,
+        'existing_bookings': existing_bookings,  # Pass existing bookings to template
         'booked_times_json': json.dumps(booked_times_list)  # Pass booked times as JSON to the template
     })
 
@@ -147,3 +161,18 @@ def view_feedback(request, booking_id):
         return redirect('manage_bookings')
 
     return render(request, 'bookings/view_feedback.html', {'booking': booking})
+
+@login_required
+def delete_booking(request, booking_id):
+    """
+    Allows a user to delete their booking. Only the booking owner or an admin/employee can delete.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+
+    # Only allow deletion if the booking belongs to the user or the user is an admin/employee.
+    if booking.user == request.user or request.user.groups.filter(name__in=['Employees', 'Admin']).exists():
+        booking.delete()
+        return redirect('manage_bookings')
+    else:
+        # Redirect with a message if unauthorized
+        return redirect('manage_bookings')
