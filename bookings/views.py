@@ -27,8 +27,8 @@ def home(request):
 def signup(request):
     '''
     Handles user signup. If a special employee code is provided,
-    the user is added to the Employee group; otherwise, they are
-    added to the User group.
+    the user is added to the Employees group; otherwise, they are
+    added to the Users group.
     '''
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -38,13 +38,15 @@ def signup(request):
             # Get the code from the form
             code = form.cleaned_data.get('code')
 
+            # Ensure the "Employees" group exists
+            employees_group, created = Group.objects.get_or_create(name='Employees')
+            users_group, created = Group.objects.get_or_create(name='Users')
+
             # Check the code and assign the user to the appropriate group
             if code == 'EMPLOYEE2024':
-                employee_group = Group.objects.get(name='Employee')
-                user.groups.add(employee_group)
+                user.groups.add(employees_group)
             else:
-                user_group = Group.objects.get(name='User')
-                user.groups.add(user_group)
+                user.groups.add(users_group)
 
             # Log the user in and redirect them
             login(request, user)
