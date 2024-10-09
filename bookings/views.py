@@ -84,6 +84,14 @@ def create_booking(request):
 
     return render(request, 'bookings/create_booking.html', {'form': form})
 
+@login_required
+def booking_confirmation(request, booking_id):
+    """
+    Displays a confirmation page after a booking is created.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+    return render(request, 'bookings/booking_confirmation.html', {'booking': booking})
+
 # View for employees/admins to accept a booking
 @login_required
 @permission_required('bookings.can_accept_booking', raise_exception=True)
