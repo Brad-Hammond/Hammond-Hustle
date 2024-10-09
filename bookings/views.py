@@ -7,6 +7,7 @@ from django.utils.dateparse import parse_datetime  # Import if working with date
 import json  # Import json module to handle JSON data
 from .models import Booking
 from .forms import BookingForm, FeedbackForm, CustomUserCreationForm
+from .models import Booking, Coach
 
 # Create your views here.
 
@@ -59,34 +60,30 @@ def signup(request):
 @login_required
 def manage_bookings(request):
     """
-    Displays a list of bookings. Users see only their bookings,
-    employees see only bookings for their assigned coach, and admins see all bookings.
+    Displays a list of bookings based on the user's role:
+    - Users see their own bookings.
+    - Coaches see bookings where they are assigned as the coach.
+    - Admins see all bookings.
     """
     is_user = request.user.groups.filter(name="Users").exists()
-    is_employee = request.user.groups.filter(name="Employees").exists()
     is_admin = request.user.groups.filter(name="Admin").exists()
-
-    # Retrieve bookings based on the user’s group
+    
     if is_user:
-        # Users see only their own bookings
+        # Users see only their bookings
         bookings = Booking.objects.filter(user=request.user)
-    elif is_employee:
-        # Employees see only bookings for users assigned to their coach
-        if hasattr(request.user, 'coach'):
-            bookings = Booking.objects.filter(coach=request.user.coach)
-        else:
-            bookings = []  # Employee has no coach assigned
+    elif request.user.groups.filter(name="Employees").exists():
+        # Coaches see only bookings assigned to them
+        assigned_coach_name = request.user.username  # Assumes coach's name matches their username
+        bookings = Booking.objects.filter(coach=assigned_coach_name)
     elif is_admin:
         # Admins see all bookings
         bookings = Booking.objects.all()
     else:
-        bookings = []  # No bookings for others
+        bookings = []
 
-    # Render the manage_bookings template with the bookings data
     return render(request, 'bookings/manage_bookings.html', {
         'bookings': bookings,
         'is_user': is_user,
-        'is_employee': is_employee,
         'is_admin': is_admin
     })
 
