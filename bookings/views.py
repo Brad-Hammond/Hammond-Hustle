@@ -60,23 +60,34 @@ def signup(request):
 def manage_bookings(request):
     """
     Displays a list of bookings. Users see only their bookings,
-    while employees and admins see all bookings.
+    employees see only bookings for their assigned coach, and admins see all bookings.
     """
-    # Check if the user belongs to the "Users" group
     is_user = request.user.groups.filter(name="Users").exists()
+    is_employee = request.user.groups.filter(name="Employees").exists()
+    is_admin = request.user.groups.filter(name="Admin").exists()
 
     # Retrieve bookings based on the user’s group
     if is_user:
-        bookings = Booking.objects.filter(user=request.user)  # Users see only their own bookings
-    elif request.user.groups.filter(name__in=['Employees', 'Admin']).exists():
-        bookings = Booking.objects.all()  # Employees and Admins see all bookings
+        # Users see only their own bookings
+        bookings = Booking.objects.filter(user=request.user)
+    elif is_employee:
+        # Employees see only bookings for users assigned to their coach
+        if hasattr(request.user, 'coach'):
+            bookings = Booking.objects.filter(coach=request.user.coach)
+        else:
+            bookings = []  # Employee has no coach assigned
+    elif is_admin:
+        # Admins see all bookings
+        bookings = Booking.objects.all()
     else:
-        bookings = []  # If the user is not in any group, no bookings are shown
+        bookings = []  # No bookings for others
 
     # Render the manage_bookings template with the bookings data
     return render(request, 'bookings/manage_bookings.html', {
         'bookings': bookings,
-        'is_user': is_user,  # Pass user group info for conditional display in the template
+        'is_user': is_user,
+        'is_employee': is_employee,
+        'is_admin': is_admin
     })
 
 # View for creating a booking
