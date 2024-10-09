@@ -6,6 +6,13 @@
     <title>Book a Session</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <!-- Load date and time picker library (for modern browsers) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
   </head>
   <body>
     <header>
@@ -41,11 +48,92 @@
 
       <!-- Booking form -->
       <form method="POST" action="{% url 'create_booking' %}">
-        {% csrf_token %} {{ form.as_p }}
-        <!-- Render form fields as paragraphs -->
+        {% csrf_token %}
+
+        <label for="first_name">First Name</label>
+        <input
+          type="text"
+          id="first_name"
+          name="first_name"
+          placeholder="Enter your first name"
+          required
+        />
+
+        <label for="last_name">Last Name</label>
+        <input
+          type="text"
+          id="last_name"
+          name="last_name"
+          placeholder="Enter your last name"
+          required
+        />
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+        />
+
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Enter your phone number"
+          required
+        />
+
+        <label for="dob">Date of Birth</label>
+        <input
+          type="text"
+          id="dob"
+          name="dob"
+          placeholder="Select your date of birth"
+          required
+        />
+
+        <label for="coach">Preferred Coach</label>
+        <select id="coach" name="coach" required>
+          <option value="">Select a coach</option>
+          <option value="Coach A">Coach A</option>
+          <option value="Coach B">Coach B</option>
+          <option value="Coach C">Coach C</option>
+        </select>
+
+        <label for="session_time">Session Date and Time</label>
+        <input
+          type="text"
+          id="session_time"
+          name="session_time"
+          placeholder="Select a session date and time"
+          required
+        />
 
         <button type="submit" class="btn">Book Now</button>
       </form>
     </section>
+
+    <!-- Initialize flatpickr date and time picker -->
+    <script>
+      // Date picker for DOB (only date)
+      flatpickr("#dob", {
+        dateFormat: "F j, Y",
+        maxDate: "today",
+        altInput: true,
+        altFormat: "F j, Y",
+      });
+
+      // Date and time picker for Session Time
+      flatpickr("#session_time", {
+        enableTime: true,
+        dateFormat: "F j, Y h:i K",
+        altInput: true,
+        altFormat: "F j, Y h:i K",
+        minDate: "today", // Optional: Restrict to today and future dates
+      });
+    </script>
   </body>
 </html>
