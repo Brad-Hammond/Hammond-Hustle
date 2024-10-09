@@ -12,22 +12,22 @@ class Coach(models.Model):
         return self.name
 
 class Booking(models.Model):
-    # Choices for the status of the booking
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
     ]
+    COACH_CHOICES = [
+        ('John Doe', 'John Doe'),
+        ('Jane Smith', 'Jane Smith'),
+        ('Alex Johnson', 'Alex Johnson'),
+    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     session_time = models.DateTimeField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')  
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
     feedback = models.TextField(blank=True, null=True)
-    coach = models.ForeignKey(Coach, on_delete=models.SET_NULL, null=True)
+    coach = models.CharField(max_length=100, choices=COACH_CHOICES)
 
     def __str__(self):
-        """
-        String representation of the Booking instance, showing
-        the username, booking date, and status for easy identification.
-        """
         return f"{self.user.username} - {self.session_time} - {self.status}"
