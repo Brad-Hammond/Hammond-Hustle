@@ -7,7 +7,10 @@ from .models import Booking  # Import the Booking model
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['session_time']  # Adjust to the actual fields in your Booking model
+        fields = ['session_time', 'coach']  # Include coach in the form
+        widgets = {
+            'session_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 # Form for employee feedback on a booking
 class FeedbackForm(forms.ModelForm):
