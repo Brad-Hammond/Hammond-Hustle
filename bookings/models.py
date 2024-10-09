@@ -1,7 +1,7 @@
+# bookings/models.py
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Get the custom or default User model
 User = get_user_model()
 
 class Coach(models.Model):
@@ -17,10 +17,11 @@ class Booking(models.Model):
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
     ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
     COACH_CHOICES = [
-        ('John Doe', 'John Doe'),
-        ('Jane Smith', 'Jane Smith'),
-        ('Alex Johnson', 'Alex Johnson'),
+        ('Brad Hammond', 'Brad Hammond'),
+        ('Joe Bloggs', 'Joe Bloggs'),
+        ('Jane Doe', 'Jane Doe'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
