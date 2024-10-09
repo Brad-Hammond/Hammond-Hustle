@@ -114,6 +114,18 @@
 
         <button type="submit" class="btn">Book Now</button>
       </form>
+
+      <!-- Display current bookings if available -->
+      <h3>Your Current Bookings</h3>
+      {% if existing_bookings %}
+      <ul>
+        {% for booking in existing_bookings %}
+        <li>{{ booking.session_time }} - {{ booking.status }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>You have no current bookings.</p>
+      {% endif %}
     </section>
 
     <!-- Initialize flatpickr date and time picker -->
