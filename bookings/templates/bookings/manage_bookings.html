@@ -25,7 +25,7 @@
         <h2>Your Bookings</h2>
 
         {% if is_user %}
-            <!-- User's own bookings -->
+            <!-- Display user's own bookings as usual -->
             {% if bookings %}
                 <ul>
                     {% for booking in bookings %}
@@ -34,7 +34,7 @@
                             {% if booking.feedback %}
                                 - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
                             {% endif %}
-                            - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                            - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -43,7 +43,7 @@
             {% endif %}
 
         {% elif is_employee %}
-            <!-- Coach's pending and approved bookings -->
+            <!-- Display pending bookings for approval -->
             <h3>Pending Bookings for Approval</h3>
             {% if pending_bookings %}
                 <ul>
@@ -62,12 +62,13 @@
                 <p>No pending bookings for approval.</p>
             {% endif %}
 
+            <!-- Display approved bookings -->
             <h3>Approved Bookings</h3>
             {% if approved_bookings %}
                 <ul>
                     {% for booking in approved_bookings %}
                         <li>
-                            Session: {{ booking.session_time }} - Approved 
+                            Session: {{ booking.session_time }} - Approved
                             {% if booking.feedback %}
                                 - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
                             {% endif %}
@@ -88,7 +89,7 @@
                             {% if booking.feedback %}
                                 - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
                             {% endif %}
-                            - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                            - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
                         </li>
                     {% endfor %}
                 </ul>
