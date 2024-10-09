@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Session</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>Hammond Hustle</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Trainers</a></li>
+          <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="booking-form-section">
+      <h2>Book a Session</h2>
+      <p>Fill out the form below to book a training session with us.</p>
+
+      <!-- Display form errors if they exist -->
+      {% if form.errors %}
+      <div class="error">
+        <p>Please correct the errors below:</p>
+        <ul>
+          {% for field in form %} {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+          {% endfor %} {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Booking form -->
+      <form method="POST" action="{% url 'create_booking' %}">
+        {% csrf_token %} {{ form.as_p }}
+        <!-- Render form fields as paragraphs -->
+
+        <button type="submit" class="btn">Book Now</button>
+      </form>
+    </section>
+  </body>
+</html>
