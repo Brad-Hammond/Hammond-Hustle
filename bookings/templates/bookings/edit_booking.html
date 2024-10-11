@@ -44,7 +44,6 @@
 
         <form method="POST">
             {% csrf_token %}
-            <!-- Render all form fields except session_time -->
             {% for field in form %}
                 {% if field.name != 'session_time' %}
                     <div class="form-group">
@@ -55,9 +54,9 @@
                 {% endif %}
             {% endfor %}
         
-            <!-- Add session_time field manually to apply flatpickr -->
+            <!-- Manual session_time field with flatpickr integration -->
             <label for="session_time">Session time:</label>
-            <input type="text" id="session_time" name="session_time" placeholder="Select a session date and time" required />
+            <input type="text" id="session_time" name="session_time" value="{{ booking.session_time|date:'Y-m-dTH:i' }}" placeholder="Select a session date and time" required />
             
             <button type="submit" class="btn">Update Booking</button>
             <a href="{% url 'manage_bookings' %}" class="cancel-button">Cancel</a>
