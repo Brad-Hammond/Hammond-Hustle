@@ -1,91 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Bookings</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <div class="logo">
-        <h1>Hammond Hustle</h1>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'create_booking' %}">Make a Booking</a></li>
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
-        </ul>
-      </nav>
+        <div class="logo">
+            <h1>Hammond Hustle</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'create_booking' %}">Make a Booking</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section class="manage-bookings-section" id="color-black">
-      {% if is_admin %}
-        <h2>All Bookings</h2>
-        <ul>
-          {% for booking in bookings %}
-            <li>
-              Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
-              <!-- Admin can delete booking -->
-              <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
-            </li>
-          {% endfor %}
-        </ul>
-        
-      {% elif is_employee %}
-        <h3>Pending Bookings for Approval</h3>
-        {% if pending_bookings %}
-          <ul>
-            {% for booking in pending_bookings %}
-              <li>
-                Session: {{ booking.session_time }} - Pending
-                <form action="{% url 'approve_booking' booking.id %}" method="post" style="display:inline;">
-                  {% csrf_token %}
-                  <button type="submit" name="action" value="approve">Approve</button>
-                  <button type="submit" name="action" value="reject">Reject</button>
-                </form>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No pending bookings for approval.</p>
-        {% endif %}
+        {% if is_admin %}
+            <h2>All Bookings</h2>
+            <ul>
+                {% for booking in bookings %}
+                    <li>
+                        Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
+                        <!-- Admin can delete booking -->
+                        <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+        {% elif is_employee %}
+            <h3>Pending Bookings for Approval</h3>
+            {% if pending_bookings %}
+                <ul>
+                    {% for booking in pending_bookings %}
+                        <li>
+                            Session: {{ booking.session_time }} - Pending
+                            <form action="{% url 'approve_booking' booking.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="approve">Approve</button>
+                                <button type="submit" name="action" value="reject">Reject</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No pending bookings for approval.</p>
+            {% endif %}
 
-        <h3>Approved Bookings</h3>
-        {% if approved_bookings %}
-          <ul>
-            {% for booking in approved_bookings %}
-              <li>
-                Session: {{ booking.session_time }} - Approved
-                <!-- Mark as Completed form for employees -->
-                <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Mark as Completed</button>
-                </form>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No approved bookings.</p>
-        {% endif %}
+            <h3>Approved Bookings</h3>
+            {% if approved_bookings %}
+                <ul>
+                    {% for booking in approved_bookings %}
+                        <li>
+                            Session: {{ booking.session_time }} - Approved
+                            <!-- Mark as Completed form for employees -->
+                            <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit">Mark as Completed</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No approved bookings.</p>
+            {% endif %}
 
-      {% elif is_user %}
-        <h2>Your Bookings</h2>
-        {% if bookings %}
-          <ul>
-            {% for booking in bookings %}
-              <li>
-                Session: {{ booking.session_time }} - Status: {{ booking.status }}
-                - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>You have no current bookings.</p>
+        {% elif is_user %}
+            <h2>Your Bookings</h2>
+            {% if bookings %}
+                <ul>
+                    {% for booking in bookings %}
+                        <li>
+                            Session: {{ booking.session_time }} - Status: {{ booking.status }}
+                            - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link added -->
+                            - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You have no current bookings.</p>
+            {% endif %}
         {% endif %}
-      {% endif %}
     </section>
-  </body>
+</body>
 </html>
