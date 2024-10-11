@@ -31,6 +31,7 @@ class Booking(models.Model):
     class Meta:
         permissions = [
             ("can_accept_booking", "Can accept booking"),
+            ("can_delete_booking", "Can delete booking"),
         ]
 
 
