@@ -34,16 +34,29 @@ def signup(request):
 # Manage bookings view
 @login_required
 def manage_bookings(request):
+    # Check for user roles
     is_user = request.user.groups.filter(name="Users").exists()
     is_employee = request.user.groups.filter(name="Employees").exists()
+    is_admin = request.user.groups.filter(name="Admin").exists()
 
-    if is_user:
+    # Admin view: if the user is a superuser, staff, or in the Admin group, show all bookings
+    if request.user.is_superuser or request.user.is_staff or is_admin:
+        bookings = Booking.objects.all()
+        pending_bookings = Booking.objects.filter(status="Pending")
+        approved_bookings = Booking.objects.filter(status="Approved")
+
+    # User view: regular users see only their bookings
+    elif is_user:
         bookings = Booking.objects.filter(user=request.user)
         pending_bookings, approved_bookings = None, None
+
+    # Employee view: employees see only bookings related to them with statuses Pending and Approved
     elif is_employee:
         pending_bookings = Booking.objects.filter(status="Pending", coach=request.user.username)
         approved_bookings = Booking.objects.filter(status="Approved", coach=request.user.username)
         bookings = None
+
+    # Fallback if user has no specific group or permissions
     else:
         bookings, pending_bookings, approved_bookings = [], [], []
 
@@ -53,6 +66,7 @@ def manage_bookings(request):
         'approved_bookings': approved_bookings,
         'is_user': is_user,
         'is_employee': is_employee,
+        'is_admin': is_admin,
     })
 
 # Create booking view
@@ -144,31 +158,37 @@ def mark_completed(request, booking_id):
         messages.error(request, "Only approved bookings can be marked as completed.")
     return redirect('manage_bookings')
 
-# Edit booking view
 @login_required
 def edit_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
 
+    # Check if the user has permission to edit the booking: owner, staff, superuser, or in "Admin" group
+    is_admin = request.user.is_superuser or request.user.is_staff or request.user.groups.filter(name="Admin").exists()
+    
+    # Debugging: Log user status and permissions for troubleshooting
+    print(f"User: {request.user.username}, Superuser: {request.user.is_superuser}, Staff: {request.user.is_staff}, Is Admin Group: {is_admin}")
+
+    # Only allow edit if the user is the booking owner or an admin
+    if booking.user != request.user and not is_admin:
+        messages.error(request, "You do not have permission to edit this booking.")
+        return redirect('manage_bookings')
+
+    # Handle form submission for editing
     if request.method == 'POST':
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
-            # Check if the new session time conflicts with any other user's booking
-            new_session_time = form.cleaned_data['session_time']
-            if Booking.objects.filter(session_time=new_session_time).exclude(id=booking_id).exists():
-                messages.error(request, "This time slot is already booked by another user. Please select a different time.")
-            else:
-                form.save()
-                messages.success(request, "Booking updated successfully.")
-                return redirect('manage_bookings')
+            form.save()
+            messages.success(request, "Booking updated successfully.")
+            return redirect('manage_bookings')
     else:
         form = BookingForm(instance=booking)
 
-    # Gather all booked times except the current booking to disable in the form
+    # Prepare booked times for the datepicker to exclude this booking's slot
     booked_times = Booking.objects.exclude(id=booking.id).values_list('session_time', flat=True)
     booked_times_list = [dt.strftime("%Y-%m-%dT%H:%M") for dt in booked_times]
 
     return render(request, 'bookings/edit_booking.html', {
         'form': form,
         'booking': booking,
-        'booked_times_json': json.dumps(booked_times_list)
+        'booked_times_json': json.dumps(booked_times_list),
     })
