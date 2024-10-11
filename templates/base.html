@@ -6,7 +6,11 @@
     <title>Hammond Hustle</title>
     {% load static %}
     <!-- Favicon -->
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
@@ -19,12 +23,13 @@
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="#">About Us</a></li>
-          <li><a href="#">Trainers</a></li>
+          <li><a href="#team-section">Trainers</a></li>
+          <!-- Anchor link to Team Section -->
           {% if user.is_authenticated %}
-            <li><a href="{% url 'my_account' %}">My Account</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          <li><a href="{% url 'my_account' %}">My Account</a></li>
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
-            <li><a href="{% url 'login' %}">Log In</a></li>
+          <li><a href="{% url 'login' %}">Log In</a></li>
           {% endif %}
         </ul>
       </nav>
@@ -47,6 +52,48 @@
         {% endif %}
       </div>
       <div class="hero-image"></div>
+    </section>
+
+    <!-- Team Section with ID for scrolling -->
+    <section class="team-section" id="team-section">
+      <h2>Our Team</h2>
+      <p>
+        Meet our professional trainers who are here to help you achieve your
+        fitness goals.
+      </p>
+
+      <div class="team-grid">
+        <div class="team-member">
+          <img
+            src="{% static 'images/BradHammondImage.jpg' %}"
+            alt="Brad Hammond"
+          />
+          <h3>Brad Hammond</h3>
+        </div>
+        <div class="team-member">
+          <img src="{% static 'images/JaneDoeImage.jpg' %}" alt="Jane Doe" />
+          <h3>Jane Doe</h3>
+        </div>
+        <div class="team-member">
+          <img
+            src="{% static 'images/JoeBloggsImage.jpg' %}"
+            alt="Joe Bloggs"
+          />
+          <h3>Joe Bloggs</h3>
+        </div>
+      </div>
+    </section>
+    <section class="about-us">
+      <div class="about-text">
+        <h2>About Hammond Hustle</h2>
+        <p>
+          At Hammond Hustle, we believe in empowering individuals to push their
+          limits and achieve greatness. Our state-of-the-art facilities and
+          experienced trainers are here to support you on your journey. Join our
+          community and discover a passion for fitness like never before.
+        </p>
+      </div>
+      <div class="about-image"></div>
     </section>
   </body>
 </html>
