@@ -33,6 +33,7 @@
             </li>
           {% endfor %}
         </ul>
+        
       {% elif is_employee %}
         <h3>Pending Bookings for Approval</h3>
         {% if pending_bookings %}
@@ -61,13 +62,18 @@
                 {% if booking.feedback %}
                   - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
                 {% endif %}
+                <!-- Mark as Completed form for employees -->
+                <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit">Mark as Completed</button>
+                </form>
               </li>
             {% endfor %}
           </ul>
         {% else %}
           <p>No approved bookings.</p>
         {% endif %}
-        
+
       {% elif is_user %}
         <h2>Your Bookings</h2>
         {% if bookings %}

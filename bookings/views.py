@@ -59,31 +59,42 @@ def signup(request):
 
 @login_required
 def manage_bookings(request):
+    # Check group memberships
     is_user = request.user.groups.filter(name="Users").exists()
     is_employee = request.user.groups.filter(name="Employees").exists()
-    is_admin = request.user.is_superuser  # Directly check if the user is a superuser
+    is_admin = request.user.groups.filter(name="Admin").exists()
 
+    # Define accessible bookings based on user role
     if is_user:
-        # Users see only their own bookings
+        # Regular users see only their bookings
         bookings = Booking.objects.filter(user=request.user)
+        pending_bookings, approved_bookings = None, None
+
     elif is_employee:
-        # Employees see bookings that are pending for approval and approved ones
-        pending_bookings = Booking.objects.filter(status="Pending")
-        approved_bookings = Booking.objects.filter(status="Accepted")
+        # Employees see bookings where they are the assigned coach
+        pending_bookings = Booking.objects.filter(status="Pending", coach=request.user.username)
+        approved_bookings = Booking.objects.filter(status="Approved", coach=request.user.username)
+        bookings = None  # Not needed for employees, handled by pending/approved lists
+
     elif is_admin:
-        # Superuser admins see all bookings
+        # Admins see all bookings
         bookings = Booking.objects.all()
+        pending_bookings, approved_bookings = None, None
+
     else:
-        bookings = []
+        # Default empty lists if no condition is met
+        bookings, pending_bookings, approved_bookings = [], [], []
 
     return render(request, 'bookings/manage_bookings.html', {
-        'bookings': bookings if is_user or is_admin else None,
-        'pending_bookings': pending_bookings if is_employee else None,
-        'approved_bookings': approved_bookings if is_employee else None,
+        'bookings': bookings,  # For Users and Admins
+        'pending_bookings': pending_bookings,  # For Employees
+        'approved_bookings': approved_bookings,  # For Employees
         'is_user': is_user,
         'is_employee': is_employee,
         'is_admin': is_admin,
     })
+
+
 
 # View for creating a booking
 @login_required
@@ -240,3 +251,20 @@ def delete_booking(request, booking_id):
         messages.error(request, "You do not have permission to delete this booking.")
 
     return redirect('manage_bookings')
+
+@login_required
+@permission_required('bookings.can_accept_booking', raise_exception=True)
+def mark_completed(request, booking_id):
+    """
+    Allows employees to mark an approved booking as completed.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+
+    if booking.status == 'Accepted':
+        booking.status = 'Completed'
+        booking.save()
+        messages.success(request, "Booking marked as completed.")
+        return redirect('leave_feedback', booking_id=booking.id)  # Redirect to feedback form
+    else:
+        messages.error(request, "Only approved bookings can be marked as completed.")
+        return redirect('manage_bookings')

@@ -12,12 +12,13 @@ class Booking(models.Model):
         ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
+        ('Completed', 'Completed'),
     ]
 
     COACH_CHOICES = [
-        ('Brad Hammond', 'Brad Hammond'),
-        ('Joe Bloggs', 'Joe Bloggs'),
-        ('Jane Doe', 'Jane Doe'),
+        ('Brad-Hammond', 'Brad Hammond'),
+        ('testemp1', 'Joe Bloggs'),
+        ('testemp2Female', 'Jane Doe'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
