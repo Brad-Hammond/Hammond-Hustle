@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
 import json
-from .models import Booking
-from .forms import BookingForm, FeedbackForm, CustomUserCreationForm  # Import your forms here
+from .models import Booking, Profile
+from .forms import BookingForm, FeedbackForm, CustomUserCreationForm, UserUpdateForm, ProfileUpdateForm  # Import your forms here
+from django.contrib import messages
 
 # Create your views here.
 
@@ -82,7 +83,6 @@ def manage_bookings(request):
         'is_employee': is_employee,
         'is_admin': is_admin,
     })
-
 
 # View for creating a booking
 @login_required
@@ -199,3 +199,26 @@ def approve_booking(request, booking_id):
         return redirect('manage_bookings')
     
     return render(request, 'bookings/approve_booking.html', {'booking': booking})
+
+@login_required
+def my_account(request):
+    # Check if the user has a profile; if not, create one
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('my_account')  # Redirect to the same page after saving
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'bookings/my_account.html', context)
