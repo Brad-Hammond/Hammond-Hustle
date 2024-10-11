@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hammond Hustle</title>
-    <!-- Static link to the CSS file -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
@@ -26,6 +25,7 @@
         </ul>
       </nav>
     </header>
+
     <section class="hero">
       <div class="hero-text">
         <h2>HAMMOND HUSTLE</h2>
@@ -37,10 +37,8 @@
           first step toward reaching your fitness goals!
         </p>
         {% if user.is_authenticated %}
-        <!-- "Make Bookings" button only visible to authenticated users -->
         <a href="{% url 'create_booking' %}" class="btn">MAKE A BOOKING</a>
         {% else %}
-        <!-- Placeholder button for unauthenticated users -->
         <a href="#" class="btn">DISCOVER ALL CLASSES</a>
         {% endif %}
       </div>

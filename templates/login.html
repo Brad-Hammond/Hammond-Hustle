@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     {% load static %}
-    <!-- Load the static template tag -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <!-- Link to CSS file -->
   </head>
   <body>
     <header>
@@ -22,17 +20,20 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
+          <!-- Log In link opens in the same tab -->
           <li><a href="{% url 'login' %}">Log In</a></li>
           {% endif %}
         </ul>
       </nav>
     </header>
+
     <div id="color-black">
       <section class="form-section">
         <h2>Login</h2>
+        <!-- Login form action points to login URL, opening in the same tab -->
         <form method="POST" action="{% url 'login' %}">
-          {% csrf_token %} {{ form.as_p }}
-          <!-- Renders the login form fields -->
+          {% csrf_token %}
+          {{ form.as_p }}
           <button type="submit" class="btn">Log In</button>
         </form>
         <p>
