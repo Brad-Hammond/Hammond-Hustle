@@ -31,7 +31,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirects to the homepage URL
 SECRET_KEY = 'django-insecure-k_rrx)%lij=ls7x!kg4fb9hc2*#i=hgn-qe2ho7xtedtbl70)%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['hammond-hustle-6962877d2ab9.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'gym_website.urls'
@@ -122,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
