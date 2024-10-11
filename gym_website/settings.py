@@ -31,7 +31,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirects to the homepage URL
 SECRET_KEY = 'django-insecure-k_rrx)%lij=ls7x!kg4fb9hc2*#i=hgn-qe2ho7xtedtbl70)%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['hammond-hustle-6962877d2ab9.herokuapp.com', 'localhost', '127.0.0.1']
 
