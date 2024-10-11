@@ -298,3 +298,38 @@ nav ul li a:hover {
   text-align: center;
 }
 
+/* My Account page styles */
+.account-section {
+  background-color: #111; /* Dark background for consistency */
+  padding: 50px; /* Padding for the form */
+  border-radius: 10px; /* Rounded corners */
+  width: 400px; /* Set width for the form container */
+  margin: auto; /* Center the form */
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4); /* Subtle shadow for depth */
+}
+
+.account-section h2 {
+  color: #fff; /* White text color for headings */
+  margin-bottom: 20px; /* Space below heading */
+}
+
+.account-section form {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.account-section button {
+  padding: 10px; /* Padding for buttons */
+  font-size: 1rem; /* Font size */
+  background-color: #ff6347; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded button */
+  cursor: pointer; /* Pointer on hover */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+}
+
+.account-section button:hover {
+  background-color: #ff7f50; /* Lighter color on hover */
+}
