@@ -1,12 +1,10 @@
-# bookings/views.py
 from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
-from django.utils.dateparse import parse_datetime
 import json
-from .models import Booking, Coach
+from .models import Booking
 from .forms import BookingForm, FeedbackForm, CustomUserCreationForm  # Import your forms here
 
 # Create your views here.
@@ -67,10 +65,9 @@ def manage_bookings(request):
         # Users see only their own bookings
         bookings = Booking.objects.filter(user=request.user)
     elif is_employee:
-        # Employees/coaches see only bookings assigned to them
-        assigned_coach_name = request.user.get_full_name()  # Using full name as identifier for assigned coach
-        pending_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Pending")
-        approved_bookings = Booking.objects.filter(coach=assigned_coach_name, status="Approved")
+        # Employees see bookings that are pending for approval and approved ones
+        pending_bookings = Booking.objects.filter(status="Pending")
+        approved_bookings = Booking.objects.filter(status="Approved")
     elif is_admin:
         # Admins see all bookings
         bookings = Booking.objects.all()
@@ -186,16 +183,14 @@ def delete_booking(request, booking_id):
     else:
         # Redirect with a message if unauthorized
         return redirect('manage_bookings')
-    
-    # bookings/views.py
 
 @login_required
 @permission_required('bookings.can_accept_booking', raise_exception=True)
 def approve_booking(request, booking_id):
+    """
+    Allows employees to approve or reject bookings.
+    """
     booking = get_object_or_404(Booking, id=booking_id)
-    # Allow any employee to approve bookings where they match as coach
-    if booking.coach != request.user.get_full_name():
-        return redirect('manage_bookings')
 
     if request.method == 'POST':
         action = request.POST.get('action')
