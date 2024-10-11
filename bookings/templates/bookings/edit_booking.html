@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Booking</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Hammond Hustle</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="booking-form-section" id="color-black">
+        <h2>Edit Booking for {{ booking.session_time|date:"D, d M Y H:i" }}</h2>
+
+        {% if form.errors %}
+        <div class="error">
+            <p>Please correct the errors below:</p>
+            <ul>
+                {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Render all form fields except session_time -->
+            {% for field in form %}
+                {% if field.name != 'session_time' %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        
+            <!-- Add session_time field manually to apply flatpickr -->
+            <label for="session_time">Session time:</label>
+            <input type="text" id="session_time" name="session_time" placeholder="Select a session date and time" required />
+            
+            <button type="submit" class="btn">Update Booking</button>
+            <a href="{% url 'manage_bookings' %}" class="cancel-button">Cancel</a>
+        </form>
+        
+    <!-- Initialize flatpickr with disabled dates -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("JavaScript loaded");
+
+            const bookedTimes = JSON.parse("{{ booked_times_json|escapejs }}");
+            console.log("Booked Times:", bookedTimes); // Confirm that bookedTimes is correctly parsed
+
+            flatpickr("#session_time", {
+                enableTime: true,
+                dateFormat: "Y-m-dTH:i",
+                altInput: true,
+                altFormat: "F j, Y h:i K",
+                minDate: "today",
+                disable: bookedTimes // Disables booked dates by graying them out
+            });
+        });
+    </script>
+</body>
+</html>
