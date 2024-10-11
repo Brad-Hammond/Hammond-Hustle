@@ -1,15 +1,9 @@
 # bookings/models.py
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
-class Coach(models.Model):
-    name = models.CharField(max_length=100)
-    employees = models.ManyToManyField(User, related_name="assigned_coaches")
-
-    def __str__(self):
-        return self.name
 
 class Booking(models.Model):
     STATUS_CHOICES = [
@@ -17,7 +11,7 @@ class Booking(models.Model):
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
     ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+
     COACH_CHOICES = [
         ('Brad Hammond', 'Brad Hammond'),
         ('Joe Bloggs', 'Joe Bloggs'),
@@ -32,3 +26,8 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.session_time} - {self.status}"
+
+    class Meta:
+        permissions = [
+            ("can_accept_booking", "Can accept booking"),
+        ]
