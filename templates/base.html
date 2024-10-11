@@ -18,9 +18,10 @@
           <li><a href="#">About Us</a></li>
           <li><a href="#">Trainers</a></li>
           {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
-          <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
           {% endif %}
         </ul>
       </nav>
