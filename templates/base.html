@@ -30,18 +30,19 @@
       <div class="hero-text">
         <h2>HAMMOND HUSTLE</h2>
         <h2>FROM UK</h2>
-        <h2>WITH PASSION</h2>
+        <h2>WITH PASSION.</h2>
         <p>
           At Hammond Hustle, we’re passionate about helping you achieve real
           results. Book a session with one of our expert trainers and take the
           first step toward reaching your fitness goals!
         </p>
         {% if user.is_authenticated %}
-        <a href="{% url 'create_booking' %}" class="btn">MAKE A BOOKING</a>
+        <a href="{% url 'create_booking' %}" class="btn">Make a Booking</a>
         {% else %}
-        <a href="#" class="btn">DISCOVER ALL CLASSES</a>
+        <a href="#" class="btn">Discover All Classes</a>
         {% endif %}
       </div>
+      <div class="hero-image"></div>
     </section>
   </body>
 </html>
