@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),  # Root URL directs to the home view
     path('bookings/', include('bookings.urls')),  # Include all bookings URLs
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
