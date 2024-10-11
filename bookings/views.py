@@ -59,8 +59,8 @@ def signup(request):
 @login_required
 def manage_bookings(request):
     is_user = request.user.groups.filter(name="Users").exists()
-    is_employee = request.user.groups.filter(name="Employees").exists()  # Unified to "Employees" group
-    is_admin = request.user.groups.filter(name="Admin").exists()
+    is_employee = request.user.groups.filter(name="Employees").exists()
+    is_admin = request.user.is_superuser  # Directly check if the user is a superuser
 
     if is_user:
         # Users see only their own bookings
@@ -68,9 +68,9 @@ def manage_bookings(request):
     elif is_employee:
         # Employees see bookings that are pending for approval and approved ones
         pending_bookings = Booking.objects.filter(status="Pending")
-        approved_bookings = Booking.objects.filter(status="Approved")
+        approved_bookings = Booking.objects.filter(status="Accepted")
     elif is_admin:
-        # Admins see all bookings
+        # Superuser admins see all bookings
         bookings = Booking.objects.all()
     else:
         bookings = []
