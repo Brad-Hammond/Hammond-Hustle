@@ -7,6 +7,7 @@ import json
 from .models import Booking, Profile
 from .forms import BookingForm, FeedbackForm, CustomUserCreationForm, UserUpdateForm, ProfileUpdateForm  # Import your forms here
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 
@@ -222,3 +223,20 @@ def my_account(request):
         'profile_form': profile_form,
     }
     return render(request, 'bookings/my_account.html', context)
+
+@login_required
+@user_passes_test(lambda u: u.is_staff or u.groups.filter(name='Admin').exists())
+def delete_booking(request, booking_id):
+    """
+    Allows an admin or the booking owner to delete a booking.
+    """
+    booking = get_object_or_404(Booking, id=booking_id)
+
+    # Only allow deletion if the booking belongs to the user or the user is an admin.
+    if booking.user == request.user or request.user.groups.filter(name__in=['Admin']).exists():
+        booking.delete()
+        messages.success(request, "Booking has been successfully deleted.")
+    else:
+        messages.error(request, "You do not have permission to delete this booking.")
+
+    return redirect('manage_bookings')
