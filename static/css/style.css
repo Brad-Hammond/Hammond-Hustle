@@ -238,3 +238,63 @@ nav ul li a:hover {
   color: #ccc;
 }
 
+/* Manage bookings section */
+.manage-bookings-section {
+  max-width: 600px;
+  margin: auto;
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  text-align: left;
+}
+
+.manage-bookings-section h2,
+.manage-bookings-section h3 {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.manage-bookings-section ul {
+  list-style: none;
+  padding: 0;
+  color: #ccc;
+}
+
+.manage-bookings-section ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+}
+
+.manage-bookings-section a {
+  color: #ff6347;
+  text-decoration: none;
+}
+
+.manage-bookings-section a:hover {
+  text-decoration: underline;
+}
+
+.manage-bookings-section button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.manage-bookings-section button:hover {
+  background-color: #ff7f50;
+}
+
+.manage-bookings-section p {
+  color: #ccc;
+  text-align: center;
+}
+
