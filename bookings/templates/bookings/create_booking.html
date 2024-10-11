@@ -30,7 +30,7 @@
       </nav>
     </header>
 
-    <section class="booking-form-section">
+    <section class="booking-form-section" id="color-black">
       <h2>Book a Session</h2>
       <p>Fill out the form below to book a training session with us.</p>
 
@@ -130,10 +130,8 @@
 
     <!-- Initialize flatpickr date and time picker -->
     <script>
-      // Parse the JSON data passed from Django
       const bookedTimes = JSON.parse("{{ booked_times_json|escapejs }}");
 
-      // Date picker for DOB (only date)
       flatpickr("#dob", {
         dateFormat: "F j, Y",
         maxDate: "today",
@@ -141,7 +139,6 @@
         altFormat: "F j, Y",
       });
 
-      // Date and time picker for Session Time with disabled dates/times
       flatpickr("#session_time", {
         enableTime: true,
         dateFormat: "Y-m-dTH:i",
