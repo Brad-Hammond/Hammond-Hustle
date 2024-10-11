@@ -15,6 +15,43 @@ body {
   align-items: center;
   justify-content: center;
 }
+/* === Fixed Navbar Styles (Add this section to make the navbar constant) === */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #000; /* Background color to cover content behind */
+  padding: 20px 50px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+nav ul li a:hover {
+  color: #ff6347;
+}
 
 /* Header */
 header {
@@ -300,36 +337,325 @@ nav ul li a:hover {
 
 /* My Account page styles */
 .account-section {
-  background-color: #111; /* Dark background for consistency */
-  padding: 50px; /* Padding for the form */
-  border-radius: 10px; /* Rounded corners */
-  width: 400px; /* Set width for the form container */
-  margin: auto; /* Center the form */
-  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4); /* Subtle shadow for depth */
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  width: 400px;
+  margin: auto;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
 }
 
 .account-section h2 {
-  color: #fff; /* White text color for headings */
-  margin-bottom: 20px; /* Space below heading */
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .account-section form {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack elements vertically */
+  display: flex;
+  flex-direction: column;
 }
 
 .account-section button {
-  padding: 10px; /* Padding for buttons */
-  font-size: 1rem; /* Font size */
-  background-color: #ff6347; /* Button background color */
-  color: #fff; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded button */
-  cursor: pointer; /* Pointer on hover */
-  font-weight: bold; /* Bold text */
-  text-transform: uppercase; /* Uppercase text */
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .account-section button:hover {
-  background-color: #ff7f50; /* Lighter color on hover */
+  background-color: #ff7f50;
+}
+/* Team Section */
+.team-section {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(255, 255, 255, 1) 20%
+  );
+  padding: 50px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.team-section h2 {
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.team-section p {
+  color: #ccc;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+/* Team Grid */
+.team-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 0 20px;
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Team Member Styles */
+.team-member {
+  background-color: #111;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  width: calc(33.333% - 40px); /* Three columns with spacing */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.team-member img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  font-size: 1.5rem;
+  color: #ff6347;
+  margin-bottom: 5px;
+}
+
+.team-member p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* About Us Section */
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: url("/static/images/AboutUsImage.jpg") no-repeat center
+    center/cover;
+  position: relative;
+  height: 100vh;
+  margin-top: -5px;
+  overflow: hidden;
+}
+
+.about-text {
+  max-width: 50%;
+  padding: 50px;
+  z-index: 2;
+  color: #fff;
+  text-align: left;
+  position: relative;
+  left: 5%; /* Adjusts the text further to the left */
+}
+
+.about-text h2 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  line-height: 1.1;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #ccc;
+  max-width: 90%;
+}
+
+.about-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
+  z-index: 1;
+}
+
+.about-us::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+  z-index: 1;
+}
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .about-us {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .about-us-text {
+    max-width: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .about-us-image {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .about-us h2 {
+    font-size: 2rem;
+  }
+
+  .about-us p {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  /* Fixed Navbar Styles */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #000; /* Keep background color to cover the content behind */
+    padding: 20px 50px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+  }
+
+  body {
+    margin: 0;
+    padding-top: 80px; /* Add padding equal to navbar height to prevent overlap */
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  nav ul li a:hover {
+    color: #ff6347;
+  }
+  .team-member {
+    width: calc(50% - 20px); /* Two columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .team-member {
+    width: 100%; /* Single column on smaller screens */
+  }
+}
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-text {
+    max-width: 80%;
+    padding: 20px;
+  }
+
+  .hero-text h2 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .booking-form-section,
+  .manage-bookings-section,
+  .account-section,
+  #color-black {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+
+  .booking-form-section,
+  .manage-bookings-section,
+  .account-section,
+  #color-black {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .hero-text .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
