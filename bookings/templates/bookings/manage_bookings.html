@@ -59,11 +59,6 @@
             {% for booking in approved_bookings %}
               <li>
                 Session: {{ booking.session_time }} - Approved
-                {% if booking.feedback %}
-                  - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
-                {% endif %}
-                <!-- Link to Leave Feedback -->
-                <a href="{% url 'leave_feedback' booking.id %}">Leave Feedback</a> <!-- Added link for leaving feedback -->
                 <!-- Mark as Completed form for employees -->
                 <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
                     {% csrf_token %}
@@ -83,9 +78,6 @@
             {% for booking in bookings %}
               <li>
                 Session: {{ booking.session_time }} - Status: {{ booking.status }}
-                {% if booking.feedback %}
-                  - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
-                {% endif %}
                 - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
               </li>
             {% endfor %}
@@ -94,20 +86,6 @@
           <p>You have no current bookings.</p>
         {% endif %}
       {% endif %}
-      {% extends "base.html" %}
-
-{% block content %}
-<section class="feedback-section">
-    <h2>Leave Feedback for {{ booking.user.username }}</h2>
-    <p>Leave Feedback Page</p>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Feedback</button>
-    </form>
-</section>
-{% endblock %}
-
     </section>
   </body>
 </html>
