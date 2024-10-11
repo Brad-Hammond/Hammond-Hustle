@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .views import my_account
 
 urlpatterns = [
     # Bookings-related URLs
@@ -11,6 +12,7 @@ urlpatterns = [
     path('view_feedback/<int:booking_id>/', views.view_feedback, name='view_feedback'),
     path('delete_booking/<int:booking_id>/', views.delete_booking, name='delete_booking'),
     path('bookings/approve/<int:booking_id>/', views.approve_booking, name='approve_booking'),
+    path('my_account/', my_account, name='my_account'),
 
     # Authentication-related URLs
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),  # Login view
