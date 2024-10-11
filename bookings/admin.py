@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Booking, Profile
+from .models import Booking, Profile, Feedback
 
 # Register the Booking model
 admin.site.register(Booking)
+admin.site.register(Feedback)
 
 # Register the Profile model with custom admin settings
 class ProfileAdmin(admin.ModelAdmin):
