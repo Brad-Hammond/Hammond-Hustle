@@ -31,8 +31,8 @@
                 {% for booking in bookings %}
                     <li>
                         Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
-                        <!-- Admin can delete booking -->
-                        <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+                        - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link for admin -->
+                        - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -81,7 +81,7 @@
                     {% for booking in bookings %}
                         <li>
                             Session: {{ booking.session_time }} - Status: {{ booking.status }}
-                            - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link added -->
+                            - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link for users -->
                             - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
                         </li>
                     {% endfor %}
