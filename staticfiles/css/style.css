@@ -1,0 +1,335 @@
+/* Reset and basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  width: 100%;
+  background-color: #000;
+}
+
+.logo h1 {
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+nav ul li a:hover {
+  color: #ff6347;
+}
+
+/* Hero section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: url("/static/images/HeroImage.jpg") no-repeat center center/cover;
+  position: relative;
+  height: 100vh;
+}
+
+.hero-text {
+  max-width: 50%;
+  padding: 50px;
+  z-index: 2;
+  color: #fff;
+  text-align: left;
+}
+
+.hero-text h2 {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hero-text h2:nth-child(2) {
+  color: #ff6347;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #ccc;
+  max-width: 80%;
+}
+
+.hero-text .btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #ff6347;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.hero-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.8));
+  z-index: 1;
+}
+
+/* Login and Signup form styles */
+#color-black {
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-section h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-section input[type="text"],
+.form-section input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-section button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.form-section button:hover {
+  background-color: #ff7f50;
+}
+
+.form-section p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-section a {
+  color: #ff6347;
+  text-decoration: none;
+}
+
+.form-section a:hover {
+  text-decoration: underline;
+}
+
+/* Booking form section styles */
+.booking-form-section {
+  max-width: 600px;
+  margin: auto;
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  text-align: left;
+}
+
+.booking-form-section h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.booking-form-section label {
+  color: #ccc;
+  margin-top: 10px;
+  display: block;
+}
+
+.booking-form-section input[type="text"],
+.booking-form-section input[type="email"],
+.booking-form-section input[type="tel"],
+.booking-form-section select,
+.booking-form-section input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.booking-form-section .btn {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.booking-form-section .btn:hover {
+  background-color: #ff7f50;
+}
+
+.booking-form-section h3 {
+  color: #fff;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.booking-form-section ul {
+  margin-top: 10px;
+  color: #ccc;
+}
+
+/* Manage bookings section */
+.manage-bookings-section {
+  max-width: 600px;
+  margin: auto;
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  text-align: left;
+}
+
+.manage-bookings-section h2,
+.manage-bookings-section h3 {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.manage-bookings-section ul {
+  list-style: none;
+  padding: 0;
+  color: #ccc;
+}
+
+.manage-bookings-section ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+}
+
+.manage-bookings-section a {
+  color: #ff6347;
+  text-decoration: none;
+}
+
+.manage-bookings-section a:hover {
+  text-decoration: underline;
+}
+
+.manage-bookings-section button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.manage-bookings-section button:hover {
+  background-color: #ff7f50;
+}
+
+.manage-bookings-section p {
+  color: #ccc;
+  text-align: center;
+}
+
+/* My Account page styles */
+.account-section {
+  background-color: #111; /* Dark background for consistency */
+  padding: 50px; /* Padding for the form */
+  border-radius: 10px; /* Rounded corners */
+  width: 400px; /* Set width for the form container */
+  margin: auto; /* Center the form */
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4); /* Subtle shadow for depth */
+}
+
+.account-section h2 {
+  color: #fff; /* White text color for headings */
+  margin-bottom: 20px; /* Space below heading */
+}
+
+.account-section form {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.account-section button {
+  padding: 10px; /* Padding for buttons */
+  font-size: 1rem; /* Font size */
+  background-color: #ff6347; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded button */
+  cursor: pointer; /* Pointer on hover */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+}
+
+.account-section button:hover {
+  background-color: #ff7f50; /* Lighter color on hover */
+}
