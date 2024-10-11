@@ -1,8 +1,9 @@
 # bookings/forms.py
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Booking  # Import the Booking model
+from .models import Booking, Profile  # Import both Booking and Profile models
 
 class BookingForm(forms.ModelForm):
     class Meta:
@@ -32,3 +33,13 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2', 'code')
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile  # Use the Profile model
+        fields = ['first_name', 'last_name', 'phone', 'date_of_birth']  # Include additional fields
