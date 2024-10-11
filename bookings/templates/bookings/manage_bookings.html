@@ -28,6 +28,8 @@
           {% for booking in bookings %}
             <li>
               Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
+              <!-- Admin can delete booking -->
+              <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
             </li>
           {% endfor %}
         </ul>
