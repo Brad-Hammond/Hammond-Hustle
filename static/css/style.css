@@ -300,36 +300,109 @@ nav ul li a:hover {
 
 /* My Account page styles */
 .account-section {
-  background-color: #111; /* Dark background for consistency */
-  padding: 50px; /* Padding for the form */
-  border-radius: 10px; /* Rounded corners */
-  width: 400px; /* Set width for the form container */
-  margin: auto; /* Center the form */
-  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4); /* Subtle shadow for depth */
+  background-color: #111;
+  padding: 50px;
+  border-radius: 10px;
+  width: 400px;
+  margin: auto;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
 }
 
 .account-section h2 {
-  color: #fff; /* White text color for headings */
-  margin-bottom: 20px; /* Space below heading */
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .account-section form {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack elements vertically */
+  display: flex;
+  flex-direction: column;
 }
 
 .account-section button {
-  padding: 10px; /* Padding for buttons */
-  font-size: 1rem; /* Font size */
-  background-color: #ff6347; /* Button background color */
-  color: #fff; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded button */
-  cursor: pointer; /* Pointer on hover */
-  font-weight: bold; /* Bold text */
-  text-transform: uppercase; /* Uppercase text */
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .account-section button:hover {
-  background-color: #ff7f50; /* Lighter color on hover */
+  background-color: #ff7f50;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-text {
+    max-width: 80%;
+    padding: 20px;
+  }
+
+  .hero-text h2 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .booking-form-section,
+  .manage-bookings-section,
+  .account-section,
+  #color-black {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+
+  .booking-form-section,
+  .manage-bookings-section,
+  .account-section,
+  #color-black {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .hero-text .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
