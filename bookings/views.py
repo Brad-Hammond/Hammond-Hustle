@@ -148,26 +148,32 @@ def accept_booking(request, booking_id):
     booking.save()
     return redirect('manage_bookings')
 
+
 # View for employees to leave feedback for an accepted booking
 @login_required
 @permission_required('bookings.can_accept_booking', raise_exception=True)
 def leave_feedback(request, booking_id):
-    """
-    Allows employees to leave feedback for a booking if it has been accepted.
-    """
-    booking = get_object_or_404(Booking, id=booking_id) 
-    if booking.status != 'Accepted':
+    booking = get_object_or_404(Booking, id=booking_id)
+
+    # Check that the status is 'Accepted' or 'Completed'
+    if booking.status not in ['Accepted', 'Completed']:
+        messages.error(request, "You cannot leave feedback for this booking.")
         return redirect('manage_bookings')
 
     if request.method == 'POST':
         form = FeedbackForm(request.POST, instance=booking)
         if form.is_valid():
-            form.save() 
+            form.save()
+            messages.success(request, "Feedback successfully submitted.")
             return redirect('manage_bookings')
     else:
         form = FeedbackForm(instance=booking)
 
+    # Ensure that this line renders the correct template
     return render(request, 'bookings/leave_feedback.html', {'form': form, 'booking': booking})
+
+
+
 
 # View for users to view feedback on their booking
 @login_required
@@ -256,15 +262,19 @@ def delete_booking(request, booking_id):
 @permission_required('bookings.can_accept_booking', raise_exception=True)
 def mark_completed(request, booking_id):
     """
-    Allows employees to mark an approved booking as completed.
+    Allows employees to mark an approved booking as completed and redirects to the feedback form.
     """
     booking = get_object_or_404(Booking, id=booking_id)
 
-    if booking.status == 'Accepted':
+    if booking.status == 'Approved':
         booking.status = 'Completed'
-        booking.save()
+        booking.save()  
         messages.success(request, "Booking marked as completed.")
-        return redirect('leave_feedback', booking_id=booking.id)  # Redirect to feedback form
+        # Redirect to the leave_feedback page for the completed booking
+        return redirect('leave_feedback', booking_id=booking.id)
     else:
         messages.error(request, "Only approved bookings can be marked as completed.")
         return redirect('manage_bookings')
+
+
+

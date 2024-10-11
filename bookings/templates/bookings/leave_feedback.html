@@ -1,7 +1,13 @@
-{% extends "base.html" %} {% block content %}
-<h2>Leave Feedback for {{ booking.user.username }}</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Submit Feedback</button>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="feedback-section">
+    <h2>Leave Feedback for {{ booking.user.username }}</h2>
+    <p>Leave Feedback Page</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Feedback</button>
+    </form>
+</section>
 {% endblock %}

@@ -62,10 +62,12 @@
                 {% if booking.feedback %}
                   - <a href="{% url 'view_feedback' booking.id %}">View Feedback</a>
                 {% endif %}
+                <!-- Link to Leave Feedback -->
+                <a href="{% url 'leave_feedback' booking.id %}">Leave Feedback</a> <!-- Added link for leaving feedback -->
                 <!-- Mark as Completed form for employees -->
                 <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
-                  {% csrf_token %}
-                  <button type="submit">Mark as Completed</button>
+                    {% csrf_token %}
+                    <button type="submit">Mark as Completed</button>
                 </form>
               </li>
             {% endfor %}
