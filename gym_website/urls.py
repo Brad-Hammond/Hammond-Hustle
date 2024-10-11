@@ -16,12 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bookings import views
+from bookings import views  # Import views from bookings app
 
 urlpatterns = [
-    path('create_booking/', views.create_booking, name='create_booking'),
-    path('manage_bookings/', views.manage_bookings, name='manage_bookings'),
     path('admin/', admin.site.urls),
-    path('bookings/', include('bookings.urls')),
-    path('', views.home, name='home'),  # Root URL redirects to the home view, rendering base.html
+    path('', views.home, name='home'),  # Root URL directs to the home view
+    path('bookings/', include('bookings.urls')),  # Include all bookings URLs
 ]
+
