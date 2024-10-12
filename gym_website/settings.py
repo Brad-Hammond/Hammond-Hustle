@@ -28,7 +28,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirects to the homepage URL
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k_rrx)%lij=ls7x!kg4fb9hc2*#i=hgn-qe2ho7xtedtbl70)%'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,6 +85,9 @@ WSGI_APPLICATION = 'gym_website.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
+DATABASES['default']['TEST'] = {
+    'NAME': 'test_db_name', 
 }
 
 # Password validation
