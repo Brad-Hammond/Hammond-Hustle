@@ -179,7 +179,7 @@ https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&
 ![lighthouse-edit-booking](media/readme-media/testing/EditBookingsLighthouse.png)
 
 ## Devices used for manual testing
-What's Cooking was tested using the following desktop and mobile browsers:
+Hammond Hustle was tested using the following desktop and mobile browsers:
 
 ### Desktop
 - Safari 18.0

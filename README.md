@@ -281,3 +281,112 @@ Below are the main features of Hammond Hustle.
 ## Testing
 
 A separate testing document has been created as [TESTING.md](TESTING.md)
+
+### Fixed Bugs
+
+#### Date Picker Disabling Booked Dates Incorrectly
+- The date picker in the booking form was not correctly disabling previously booked dates.
+- To fix this, I modified the JavaScript code to parse booked_times_json correctly and used the disable option in flatpickr to prevent users from selecting already-booked dates:
+
+```javascript
+const bookedTimes = JSON.parse("{{ booked_times_json|escapejs }}");
+flatpickr("#session_time", {
+    enableTime: true,
+    dateFormat: "Y-m-dTH:i",
+    altInput: true,
+    altFormat: "F j, Y h:i K",
+    minDate: "today",
+    disable: bookedTimes.map((date) => date)
+});
+```
+
+#### Date Picker Disabling Booked Dates Incorrectly
+- The navigation menu toggle button (☰) was not functioning on mobile screens.
+- To fix this I added the toggleMenu function to each relevant template (e.g., base.html and manage_bookings.html) to ensure that the toggle functionality was available across different pages:
+
+```javascript
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("nav-menu");
+        menu.classList.toggle("active");
+    }
+</script>
+```
+
+## Important Note
+- The secret key has been regenerated and put in my env,py file which is hidded.
+- The secret key in earlier deployment is no longer valid as it has been regenerated.
+
+## Deployment
+### Cloning & Forking
+#### Fork
+1. On GitHub.com, navigate to the [Brad-Hammond/Hammond-Hustle](https://github.com/Brad-Hammond/Hammond-Hustle/tree/main) repository.
+2. In the top-right corner of the page, click Fork.
+3. By default, forks are named the same as their parent repositories. You can change the name of the fork to distinguish it further.
+4. Add a description to your fork.
+5. Click Create fork.
+
+#### Clone
+1. Above the list of files click the button that says 'Code'.
+2. Copy the URL for the repository.
+3. Open Terminal. Change the directory to the location where you want the cloned directory.
+4. Type git clone, and then paste the URL
+5. Press Enter.
+
+### Local Deployment
+1. Sign up to [Gitpod](https://gitpod.io/)
+2. Download the Gitpod browser extension.
+3. On GitHub.com, navigate to the [Brad-Hammond/Hammond-Hustle](https://github.com/Brad-Hammond/Hammond-Hustle/tree/main) repository.
+4. Above the list of files click the button that says 'Gitpod'.
+5. Once open you will need to install the libraries, you can do this by typing "pip3 install -r requirements.txt" into the terminal
+6. Open the .env file in the project directory and change the key pair values to match your credentials.
+
+### Remote Deployment 
+1. Log in to Heroku
+2. Click 'Create new app'.
+3. Give your application a unique name, select a region appropriate to your location and click the 'Create app' button.
+4. You can use an external databAse for example postgre or use 'Heroku Postgres' under the Add-ons section.
+5. Go to settings section and click 'Reveal Config Vars' in the Config vars section.
+6. Add ALLOWED_HOSTS and the value as the name of you project with '.herokuapp.com' appended to the end.
+7. Add CLOUDINARY_URL and the value as your cloudinary API key.
+8. Add EMAIL_HOST_PASSWORD and the value as the password for the email service.
+9. Add EMAIL_HOST_USER and the value as the the email address for the email service.
+10. Add SECRET_KEY and the value as a complex string which will be used to provide cryptographic signing.
+11. Add DATABASE_URL if you are using a different database than Heroku Postgres.
+12. Navigate to the 'Deploy' page
+13. Select 'GitHub' from the 'Deployment method' section
+14. Enter your github account details and select the forked/ clone repository.
+15. Select 'Manual deploy', select the 'main' branch in the drop down and click the 'Deploy' button.
+16. Once built, click the 'View' button to load the URL.
+
+### Database
+A Postgres database has been used for this project, provided by ElephantSQL.
+
+1. Open your web browser and go to the [ElephantSQL](https://www.elephantsql.com/) website.
+2. Sign up for a free account or log in if you already have an account.
+3. Once you have logged in, you will be taken to the Dashboard. From here, click on the "Create New Instance" button.
+4. You will now be taken to a page where you can configure your new database instance. Choose the "Tiny Turtle" plan which is free.
+5. Select the region where you want to host your database. The closest region to you is usually the best choice.
+6. Choose a name for your instance, this will be the name of your database.
+7. Choose a username and password for your instance.
+8. Click on the "Create" button to create your new database instance.
+1. The database url was stored in a config var: 'DATABASE_URL' on Heroku. This variable was then used in the settings.py to connect to the database.
+10. Click on the "Details" tab to view your instance details.
+11. Look for the "URI" field, which contains the connection details you need to connect to your database. The URI should start with: 'postgres://'
+
+he models were migrated to the database by entering the following commands in the the gitpod terminal:
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+The live link can be found here - [Hammond Hustle](https://hammond-hustle-6962877d2ab9.herokuapp.com/)
+
+## Credits
+- Credits to [Device Frames](https://deviceframes.com/) for the different devices image in the ReadMe
+- HTML, CSS and Javascript code help was taken from w3schools - [W3Schools](https://www.w3schools.com/)
+- Django Documentation - [Django](https://docs.djangoproject.com/en/4.1/)
+- Credits to [Code Institute](https://codeinstitute.net/full-stack-software-development-diploma/?utm_term=code%20institute&utm_campaign=CI%2B-%2BUK%2B-%2BSearch%2B-%2BBrand&utm_source=adwords&utm_medium=ppc&hsa_acc=8983321581&hsa_cam=1578649861&hsa_grp=62188641240&hsa_ad=635720257674&hsa_src=g&hsa_tgt=kwd-319867646331&hsa_kw=code%20institute&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=Cj0KCQjw8pKxBhD_ARIsAPrG45kfZu0iDMkC26LnD1BA9bVqqhFchKG1Ib_SZOD-r7-C87RpU2b6i1EaAsbWEALw_wcB&nab=2&utm_referrer=https%3A%2F%2Fwww.google.com%2F) for the learning matertial
+- Credits to [Wireframe](https://wireframe.cc/) for the mock wireframes images
+- Credits to my mentor for pushing and helping me through this project
+- Credits to Flatpicker for the date picker used
+- For all images used, credits to [Pexels](https://www.pexels.com/)
