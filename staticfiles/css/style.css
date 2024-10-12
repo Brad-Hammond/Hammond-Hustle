@@ -141,12 +141,15 @@ nav ul li a:hover {
 .hero-text .btn {
   display: inline-block;
   padding: 15px 30px;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
+}
+.hero-text .btn:hover {
+  background-color: #d96b30; /* Adjust hover color */
 }
 
 /* === Hero Image Styling === */
