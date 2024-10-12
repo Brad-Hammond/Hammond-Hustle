@@ -68,18 +68,22 @@ class ViewTests(TestCase):
              user=self.user, session_time=timezone.now() + timedelta(days=1)
         )
         self.client.login(username='user1', password='password123')
-        response = self.client.post(reverse('edit_booking', args=[booking.id]), {
-            'first_name': 'Jane', 'last_name': 'Doe',
-            'email': 'jane@example.com', 'phone': '9876543210',
-            'dob': '1995-05-05', 'coach': 'Brad-Hammond',
-            'session_time': (timezone.make_aware(
-                datetime.now() + timedelta(days=2))
-            ).strftime("%Y-%m-%dT%H:%M")
-        })
-        
+        response = self.client.post(
+            reverse('edit_booking', args=[booking.id]),
+            {
+                'first_name': 'Jane',
+                'last_name': 'Doe',
+                'email': 'jane@example.com',
+                'phone': '9876543210',
+                'dob': '1995-05-05',
+                'coach': 'Brad-Hammond',
+                'session_time': (
+                   timezone.make_aware(datetime.now() + timedelta(days=2))
+                ).strftime("%Y-%m-%dT%H:%M"),
+            }
+        )
         if response.status_code == 200:
             print(response.context['form'].errors)
-        
         booking.refresh_from_db()
         self.assertEqual(response.status_code, 302)
         self.assertEqual(booking.user, self.user)
