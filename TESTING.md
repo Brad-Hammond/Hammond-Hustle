@@ -124,3 +124,17 @@ Manual testing occurred regularly throughout local development. Tests are docume
 ### Javascript
 
 ### Python
+
+#### admin.py
+![admin](media/readme-media/testing/CIPLinterAdmin.png)
+#### apps.py
+![apps](media/readme-media/testing/CIPLinterApps.png)
+#### forms.py
+![forms](media/readme-media/testing/CIPLinterForms.png)
+#### models.py
+![models](media/readme-media/testing/CIPLinterModels.png)
+#### urls.py
+![urls](media/readme-media/testing/CIPLinterUrls.png)
+#### views.py
+![views](media/readme-media/testing/CIPLinterViews.png)
+
