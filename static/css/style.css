@@ -501,6 +501,24 @@ nav ul li a:hover {
   background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
   z-index: 1;
 }
+
+/* Booking button styling */
+
+.manage-bookings-section .btn {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.manage-bookings-section .btn:hover {
+  background-color: #ff7f50;
+}
+
 /* Responsive Styling */
 @media (max-width: 768px) {
   .about-us {
@@ -527,6 +545,23 @@ nav ul li a:hover {
   .about-us p {
     font-size: 1rem;
   }
+}
+
+/* Cancel Button Styling */
+.cancel-button {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.cancel-button:hover {
+  background-color: #ff7f50;
 }
 
 /* Responsive Adjustments */
