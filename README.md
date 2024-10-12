@@ -20,7 +20,7 @@ Welcome to Hammond Hustle, the go-to fitness site for individuals committed to t
 
 - Offer a visually appealing and user-friendly interface that makes navigation seamless and booking sessions straightforward.
 
-- Ensure the app is scalable, with the capability to accommodate a growing number of users, trainers, and bookings over time.
+- Ensure the app's scalability, allowing it to accommodate a growing number of users, trainers, and bookings over time.
 
 - Offer robust security features to protect user data, ensuring compliance with privacy regulations and providing a safe user experience.
 
@@ -30,13 +30,13 @@ Overall, the goal of Hammond Hustle is to offer an accessible, professional book
 
 ## How to use it
 
-Here are the steps to use **What's Cooking**:
+Here are the steps to use **Hammond Hustle**:
 
 1. Create an account: To get started, you will need to create an account by entering your email address, and password.
 
 2. Update your profile: After creating an account, you can update your profile information, with personal information, such as your name, to help others get to know you better.
 
-3. Make a booking: navitage to the make a make a booking screen where you can enter your details, chose your coach and get booked in for a session.
+3. Make a booking: navitage to the make a 'Make a Booking' screen where you can enter your details, chose your coach and get booked in for a session.
 
 4. Edit a booking: navigate to the your bookings screen, if you want to change the date or time of a booking or even cancel the booking altogether, you can do so in here.
 
@@ -238,7 +238,7 @@ Below are the main features of Hammond Hustle.
 ### Employee
 
 ##### Your Booking
-- On the your booking screen for employees, their view is simlar.
+- On the 'Your Bookings' screen for employees, their view is similar.
 - However, on theirs they can see users who want to book with them.
 - Employees can reject, approve, and once approved they can mark as completed.
 
@@ -264,7 +264,7 @@ Below are the main features of Hammond Hustle.
 
 #### Profile Pictures
 - This feature would allow users to upload a profile picture to the site.
-- Due to time constraints I could not implement this feature but it will be added in the future.
+- Due to time constraints, I could not implement this feature, but it will be added in the future.
 
 ***
 
@@ -300,7 +300,7 @@ flatpickr("#session_time", {
 });
 ```
 
-#### Date Picker Disabling Booked Dates Incorrectly
+#### JavaScript Toggle Menu Not Working on Smaller Screens
 - The navigation menu toggle button (☰) was not functioning on mobile screens.
 - To fix this I added the toggleMenu function to each relevant template (e.g., base.html and manage_bookings.html) to ensure that the toggle functionality was available across different pages:
 
@@ -314,7 +314,7 @@ flatpickr("#session_time", {
 ```
 
 ## Important Note
-- The secret key has been regenerated and put in my env,py file which is hidded.
+- The secret key has been regenerated and put in my env.py file which is hidded.
 - The secret key in earlier deployment is no longer valid as it has been regenerated.
 
 ## Deployment
