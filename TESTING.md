@@ -70,6 +70,26 @@ Manual testing occurred regularly throughout local development. Tests are docume
 
 [Project Stories](https://github.com/users/Brad-Hammond/projects/2)
 
-[User story 1]([#1](https://github.com/users/Brad-Hammond/projects/2/views/1?pane=issue&itemId=80907031&issue=Brad-Hammond%7CHammond-Hustle%7C1)) - I know I am done with the 'As a site user I can sign up and log in so that i can make an account on the site' user story when as a user i can signup and login on the site - PASS
+[User story 1] - I know I am done with the 'As a site user I can sign up and log in so that i can make an account on the site' user story when as a user I can signup and login on the site - PASS
+
+[User story 2] - I know I am done with the 'As a admin I can access all other levels of access so that I can check on the site overall' user story when as a admin I have access to do all things the other users can - PASS
+
+[User story 3] - I know I am done with the 'As a user I can book and manage sessions so that I can tailor them to my needs' user story when as a user I can create bookings and manage these (CRUD) - PASS
+
+[User story 4] - I know I am done with the 'As a employee I can accept or reject user bookings so that I can fit the booking in with other clients' user story when as a employee I can accept or reject bookings - PASS
+
+[User story 5] - This fell out of scope due to time constraints.
+
+[User story 6] - I know I am done with the 'As a user I can see if a session time has already been booked so that I do not double book a time with a coach' user story when as a user I cannot book on days which have already been booked - PASS
+
+[User story 7] - I know I am done with the 'As a employee I can see my own bookings so that I do not see my colleagues bookings' user story when as a employee I cannot see other coaches bookings - PASS
+
+[User story 8] - I know I am done with the 'As a user I can stay on the same browser tab across the site so that I do not get confused of being on a different browser' user story when as a user I stay on the same browser across the site - PASS
+
+[User story 9] - I know I am done with the 'As a User I can edit the date and time of a booking to better suit my needs.' user story when as a user I can edit the date and time of bookings - PASS
+
+[User story 10] - I know I am done with the 'As a employee I can mark a booking as completed so that the employee knows the booking is completed' user story when as a employee I can see and press the mark as completed button - PASS
+
+
 
 
