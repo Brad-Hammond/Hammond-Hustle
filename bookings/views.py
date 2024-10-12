@@ -12,13 +12,16 @@ from .forms import (
 from django.contrib import messages
 import json
 
+
 # Render base.html for the home/root URL
 def home(request):
     is_user = request.user.is_authenticated and \
           request.user.groups.filter(name='Users').exists()
     return render(request, 'base.html', {'is_user': is_user})
 
+
 # User signup view
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -37,16 +40,22 @@ def signup(request):
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
+
 # Manage bookings view
+
 @login_required
 def manage_bookings(request):
+    # Initialize variables to avoid UnboundLocalError
+    bookings, pending_bookings, approved_bookings = None, None, None
+
     # Check for user roles
     is_user = request.user.groups.filter(name="Users").exists()
     is_employee = request.user.groups.filter(name="Employees").exists()
     is_admin = request.user.groups.filter(name="Admin").exists()
+
     '''
     Admin view: if the user is a superuser, staff,
-    r in the Admin group, show all bookings
+    or in the Admin group, show all bookings
     '''
     if request.user.is_superuser or request.user.is_staff or is_admin:
         bookings = Booking.objects.all()
@@ -59,7 +68,7 @@ def manage_bookings(request):
         pending_bookings, approved_bookings = None, None
 
     # Employee view: employees see only bookings
-# related to them with statuses Pending and Approved
+    # related to them with statuses Pending and Approved
     elif is_employee:
         bookings = Booking.objects.filter(
             coach=request.user.username, status__in=["Pending", "Approved"]
@@ -77,6 +86,7 @@ def manage_bookings(request):
         'is_employee': is_employee,
         'is_admin': is_admin,
     })
+
 
 # Create booking view
 @login_required
@@ -97,7 +107,8 @@ def create_booking(request):
         'booked_times_json': json.dumps(booked_times_list)
     })
 
-# Delete booking view (revised)
+
+# Delete booking view
 @login_required
 def delete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
@@ -115,6 +126,7 @@ def delete_booking(request, booking_id):
         )
     return redirect('manage_bookings')
 
+
 # Booking confirmation view
 @login_required
 def booking_confirmation(request, booking_id):
@@ -122,6 +134,8 @@ def booking_confirmation(request, booking_id):
     return render(
         request, 'bookings/booking_confirmation.html', {'booking': booking}
     )
+
+
 # Accept booking view for employees/admins
 @login_required
 def accept_booking(request, booking_id):
@@ -129,6 +143,7 @@ def accept_booking(request, booking_id):
     booking.status = 'Accepted'
     booking.save()
     return redirect('manage_bookings')
+
 
 # Approve booking view
 @login_required
@@ -142,6 +157,7 @@ def approve_booking(request, booking_id):
     return render(
         request, 'bookings/approve_booking.html', {'booking': booking}
         )
+
 
 # My account view
 @login_required

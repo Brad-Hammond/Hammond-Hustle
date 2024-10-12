@@ -20,6 +20,8 @@ urlpatterns = [
          name='mark_completed'),
     path('edit_booking/<int:booking_id>/', views.edit_booking,
          name='edit_booking'),
+    path('booking/confirmation/<int:booking_id>/',
+         views.booking_confirmation, name='booking_confirmation'),
 
     # Authentication-related URLs
     path(

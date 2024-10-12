@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Booking, Profile, Feedback  # Import Feedback model as well
 
+
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
@@ -47,4 +48,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile  # Use the Profile model
-        fields = ['first_name', 'last_name', 'phone', 'date_of_birth']  # Include additional fields
+        fields = ['first_name', 'last_name', 'phone', 'date_of_birth']
