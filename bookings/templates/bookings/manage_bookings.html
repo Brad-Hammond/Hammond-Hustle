@@ -38,7 +38,7 @@
             <ul>
                 {% for booking in bookings %}
                     <li>
-                        Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
+                        <span>Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}</span>
                         - <a href="{% url 'edit_booking' booking.id %}">Edit</a>
                         - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
                     </li>
@@ -51,7 +51,7 @@
                 <ul>
                     {% for booking in pending_bookings %}
                         <li>
-                            Session: {{ booking.session_time }} - Pending
+                            <span>Session: {{ booking.session_time }} - Pending</span>
                             <form action="{% url 'approve_booking' booking.id %}" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" name="action" value="approve">Approve</button>
@@ -69,7 +69,7 @@
                 <ul>
                     {% for booking in approved_bookings %}
                         <li>
-                            Session: {{ booking.session_time }} - Approved
+                            <span>Session: {{ booking.session_time }} - Approved</span>
                             <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit">Mark as Completed</button>
@@ -87,7 +87,7 @@
                 <ul>
                     {% for booking in bookings %}
                         <li>
-                            Session: {{ booking.session_time }} - Status: {{ booking.status }}
+                            <span>Session: {{ booking.session_time }} - Status: {{ booking.status }}</span>
                             - <a href="{% url 'edit_booking' booking.id %}">Edit</a>
                             - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
                         </li>
@@ -109,4 +109,4 @@
         }
       </script>
 </body>
-</html>
+</html>  
