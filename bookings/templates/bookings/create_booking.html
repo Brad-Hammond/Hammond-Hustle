@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book a Session</title>
@@ -19,8 +19,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <header>
       <div class="logo">
         <h1>Hammond Hustle</h1>
@@ -126,18 +126,6 @@
 
         <button type="submit" class="btn">Book Now</button>
       </form>
-
-      <!-- Display current bookings if available -->
-      <h3>Your Current Bookings</h3>
-      {% if existing_bookings %}
-      <ul>
-        {% for booking in existing_bookings %}
-        <li>{{ booking.session_time }} - {{ booking.status }}</li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p>You have no current bookings.</p>
-      {% endif %}
     </section>
 
     <!-- Initialize flatpickr date and time picker -->
