@@ -42,10 +42,38 @@ Here are the steps to use **What's Cooking**:
 
 With these steps, you should be able to easily use **Hammond Hustle** to find, create and edit bookings.
 
+## User Stories & Epics
+All user stories were entered as issues in a GitHub Kanban project follow the link to see the project:
+[Project Link](https://github.com/users/Brad-Hammond/projects/2)
+
+### Epic: Booking: The ability for users to create and manage their own bookings, including updating the date if needed.
+- [3]- As a user I can book and manage sessions so that I can tailor them to my needs
+- [9] - As a User I can edit the date and time of a booking to better suit my needs
+
+### Epic: Prebooked Days: The ability for users to not be able to book prebooked days.
+- [6]- As a user I can see if a session time has already been booked so that I do not double book a time with a coach
+
+### Epic: Employee View: The ability for employees to manage / approve users bookings.
+- [7]- As a employee I can see my own bookings so that I do not see my colleagues bookings
+- [10]- As a employee I can mark a booking as completed so that the employee knows the booking is completed
+- [4]- As a employee I can accept or reject user bookings so that I can fit the booking in with other clients
+
+### Epic: Login and Singup: The ability for users to login and signup.
+- [1]- As a site user I can sign up and log in so that i can make an account on the site
+
+### Epic: Admin View: The ability for admins to have all levels of access.
+- [2]- As a admin I can access all other levels of access so that I can check on the site overall
+
+### Epic: Good UX Practice: The ability for users to stay on the same browser across the site.
+- [8]- As a user I can stay on the same browser tab across the site so that I do not get confused of being on a different browser
+
+### Incomplete User Stories for future developement
+- [5]- As a employee I can leave feedback on a users session so that they can improve for next time
 
 ## Design
 ### ERD
 ![ERD](media/readme-media/erd/ERDImage.png)
+
 
 ### Wireframes
 #### Index / Homepage
@@ -250,6 +278,6 @@ Below are the main features of Hammond Hustle.
 - django-crispy-forms
 - Postgre
 
-## Testing / User Stories
+## Testing
 
 A separate testing document has been created as [TESTING.md](TESTING.md)
