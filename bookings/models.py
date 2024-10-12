@@ -21,8 +21,13 @@ class Booking(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     session_time = models.DateTimeField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
-    feedback = models.OneToOneField('Feedback', on_delete=models.SET_NULL, null=True, blank=True, related_name='booking_feedback')  # Link to Feedback model with related_name
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default='Pending'
+    )
+    feedback = models.OneToOneField(
+        'Feedback', on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='booking_feedback'
+    )
     coach = models.CharField(max_length=100, choices=COACH_CHOICES)
 
     def __str__(self):

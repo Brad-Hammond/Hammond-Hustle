@@ -8,12 +8,13 @@ class BookingForm(forms.ModelForm):
         model = Booking
         fields = ['session_time', 'coach']  # Include coach in the form
         widgets = {
-            'session_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'session_time': forms.DateTimeInput(
+               attrs={'type': 'datetime-local'}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Populate choices for 'coach' field based on COACH_CHOICES in Booking model
         self.fields['coach'].choices = Booking.COACH_CHOICES
 
 
@@ -27,7 +28,9 @@ class FeedbackForm(forms.ModelForm):
 # Custom signup form with an optional employee code field
 class CustomUserCreationForm(UserCreationForm):
     code = forms.CharField(
-        max_length=20, required=False, help_text='Enter your code if you are an employee.'
+        max_length=20,
+        required=False,
+        help_text='Enter your code if you are an employee.'
     )
 
     class Meta:
@@ -45,5 +48,3 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile  # Use the Profile model
         fields = ['first_name', 'last_name', 'phone', 'date_of_birth']  # Include additional fields
-
-        
