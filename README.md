@@ -123,3 +123,108 @@ Desktop
 
 ### Navigation / Flow Plan
 ![Navigation Plan](media/readme-media/erd/FlowImage.png)
+
+## Features
+### Existing Features
+Below are the main features of Hammond Hustle.
+
+### Users
+
+#### Base
+##### NavBar
+- The company name is visible on all nav bar sizes.
+- The nav bar has a toggle feature on smaller devices.
+- When a user is logged in, the nav features different links for authenticated users only.
+
+![nav 1](media/readme-media/features/NavNotLoggedIn.png)
+![nav 2](media/readme-media/features/NavLoggedIn.png)
+![nav 3](media/readme-media/features/NavToggleFeat.png)
+
+##### Hero Image / Button
+- At the top of the base/index page, there is a make a booking button.
+- If not logged in, this redirects the user to the login page.
+
+![Hero Button](media/readme-media/features/HeroImageWithButton.png)
+
+##### Trainer Section
+- The trainer section includes images of the trainers.
+- On desktop, they also have a hover animation.
+- The nav link correctly links to this section on all files.
+
+![Trainers](media/readme-media/features/TeamSection.png)
+
+##### About Section
+- The about section includes a small paragraph about the company.
+- The nav link correctly links to this section on all files.
+
+![About Section](media/readme-media/features/AboutSection.png)
+
+#### Signup / Login
+##### Signup
+- The signup form informs the user of what data each input field requires.
+- If the user is an employee, they can enter their employee code here.
+- If the user enters incorrect details or misses a section, it pops up with an error message.
+
+![singup form](media/readme-media/features/SignUpForm.png)
+![error message](media/readme-media/features/PleaseFillMessage.png)
+
+##### Login
+- The login form requires correct username and password.
+- If incorrect details are entered, a message appears and the user must retry.
+
+![login form](media/readme-media/features/LogInForm.png)
+![login error message](media/readme-media/features/IncorrectLoginMessage.png)
+
+#### Bookings
+##### Create Booking Form
+- The create booking includes numerous input fields for the user to fill.
+- All data fields must be filled otherwise the same error message with the signup form will appear.
+- The DOB and Session date and time use a calender picker to make it easier for users.
+- When a user choses a time with a specific coach, if that day is already booked - it will be greyed out on the calender.
+- Bookings with coaches last all day so you cannot have multiple times on one day per coach.
+
+![create booking](media/readme-media/features/CreateBookingForm.png)
+![create date greyed](media/readme-media/features/CreateBookingDateGreyed.png)
+
+##### Your Bookings
+- The your booking screen has all bookings for that user.
+- The status will be pending until a coach (employee) approves it.
+- Once a booking is approved, the status changes from pending to approved.
+
+![Your Booking](media/readme-media/features/YourBookingSection.png)
+
+##### Edit Booking
+- The edit booking screen allows the user to edit a booking which has already been booked.
+- Like the create booking form, the dates are greyed out with already booked sessions.
+
+![edit booking](media/readme-media/features/EditBookingForm.png)
+![edit date greyed](media/readme-media/features/EditBookingDateGreyed.png)
+
+#### Account
+##### My Account
+- The my account section allows users to update their personal info.
+- Again, if not filled out correctly or a datafield is missing info, an error mesage will appear.
+
+![my account](media/readme-media/features/MyAccountForm.png)
+
+### Employee
+
+##### Your Booking
+- On the your booking screen for employees, their view is simlar.
+- However, on theirs they can see users who want to book with them.
+- Employees can reject, approve, and once approved they can mark as completed.
+
+![employee booking](media/readme-media/features/EmployeeBookings.png)
+
+### Admin
+
+##### Your Booking
+- As the admin, they can see all bookings, apprvoed, completed or rejected.
+- They also have the option to delete or edit these.
+
+![admin booking](media/readme-media/features/AdminYourBooking.png)
+
+
+
+
+
