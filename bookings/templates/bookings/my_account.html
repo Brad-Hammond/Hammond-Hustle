@@ -27,8 +27,8 @@
       <nav id="nav-menu">
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="#about-section">About Us</a></li>
-          <li><a href="#team-section">Trainers</a></li>
+          <li><a href="{% url 'home' %}#about-section">About Us</a></li>
+          <li><a href="{% url 'home' %}#team-section">Trainers</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
           <li><a href="{% url 'my_account' %}">My Account</a></li>
