@@ -45,3 +45,81 @@ With these steps, you should be able to easily use **Hammond Hustle** to find, c
 
 ## Design
 ### ERD
+![ERD](media/readme-media/erd/ERDImage.png)
+
+### Wireframes
+#### Index / Homepage
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileBaseHTML.png" alt="Index M Screen">
+</details>
+
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopBaseHTML.png" alt="Index D Screen">
+</details>
+
+#### Login
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileLoginHTML.png" alt="Login M Screen">
+</details>
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopLoginHTML.png" alt="Login D Screen">
+</details>
+
+#### Signup
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileSignupHTML.png" alt="Signup M Screen">
+</details>
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopSignupHTML.png" alt="Signup D Screen">
+</details>
+
+#### Your Booking
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileYourBookingsHTML.png" alt="Your Booking M Screen">
+</details>
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopYourBookingHTML.png" alt="Your Booking D Screen">
+</details>
+
+#### My Account
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileMyAccountHTML.png" alt="My Account M Screen">
+</details>
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopMyAccountHTML.png" alt="My Account D Screen">
+</details>
+
+#### Create Booking
+Mobile
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/mobile/MobileCreateBookingHTML.png" alt="Create Booking M Screen">
+</details>
+Desktop
+<details>
+<summary>Click to view</summary>
+<img src="media/readme-media/wireframes/desktop/DesktopCreateBookingHTML.png" alt="Create Booking D Screen">
+</details>
+
+### Navigation / Flow Plan
+![Navigation Plan](media/readme-media/erd/FlowImage.png)
