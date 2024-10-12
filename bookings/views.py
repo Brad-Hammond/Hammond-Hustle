@@ -179,6 +179,7 @@ def my_account(request):
         'profile_form': profile_form,
     })
 
+
 # Mark booking as completed view
 @login_required
 def mark_completed(request, booking_id):
@@ -191,6 +192,7 @@ def mark_completed(request, booking_id):
         messages.error(
             request, "Only approved bookings can be marked as completed.")
     return redirect('manage_bookings')
+
 
 @login_required
 def edit_booking(request, booking_id):

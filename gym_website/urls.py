@@ -24,4 +24,3 @@ urlpatterns = [
     path('bookings/', include('bookings.urls')),  # Include all bookings URLs
     path('accounts/', include('django.contrib.auth.urls')),
 ]
-

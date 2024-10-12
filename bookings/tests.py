@@ -67,7 +67,6 @@ class ViewTests(TestCase):
         booking = Booking.objects.create(
              user=self.user, session_time=timezone.now() + timedelta(days=1)
         )
-        
         self.client.login(username='user1', password='password123')
         response = self.client.post(reverse('edit_booking', args=[booking.id]), {
             'first_name': 'Jane', 'last_name': 'Doe',

@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 User = get_user_model()  # Get the user model
 
+
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
@@ -41,10 +42,12 @@ class Booking(models.Model):
 
 
 class Feedback(models.Model):
-    booking = models.OneToOneField(Booking, on_delete=models.CASCADE, related_name='feedback_booking')  # Add related_name
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Linking feedback to a user
+    booking = models.OneToOneField(
+        Booking, on_delete=models.CASCADE, related_name='feedback_booking'
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     feedback_text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set to now when created
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Feedback for {self.booking} by {self.user.username}"
@@ -60,16 +63,17 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=15, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True)  # Date of Birth field
+    date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-    
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
