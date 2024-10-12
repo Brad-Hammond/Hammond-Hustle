@@ -1,8 +1,8 @@
 # Hammond Hustle!
 
-![Logo](readme-media/Whats_Cooking_Logo.png)
+![Device View](media/readme-media/deviceview/DeviceViewImage.png)
 
-Click the link to view the live app [Hammond Hustle](media/readme-media/deviceview/DeviceViewImage.png)
+Click the link to view the live app [Hammond Hustle](https://hammond-hustle-6962877d2ab9.herokuapp.com/)
 
 Achieve your fitness goals by unlocking your true potential!
 
