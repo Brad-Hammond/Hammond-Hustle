@@ -23,7 +23,7 @@ Manual testing occurred regularly throughout local development. Tests are docume
 ### Login
 |Test #|Test|Results|Evidence|
 | --- | --- | --- |--- |
-|1| login form has the correct validation|Pass| a user must fully enter all details corretly before logging in|
+|1| login form has the correct validation|Pass| a user must fully enter all details correctly before logging in|
 
 ![login](media/readme-media/features/LogInForm.png)
 ![login error](media/readme-media/features/IncorrectLoginMessage.png)
@@ -31,21 +31,21 @@ Manual testing occurred regularly throughout local development. Tests are docume
 ### Signup
 |Test #|Test|Results|Evidence|
 | --- | --- | --- |--- |
-|1| signup form has the correct validation|Pass| a user must fully enter all details corretly before signing up|
+|1| signup form has the correct validation|Pass| a user must fully enter all details correctly before signing up|
 
 ![signup](media/readme-media/features/SignUpForm.png)
 
 ### My Account
 |Test #|Test|Results|Evidence|
 | --- | --- | --- |--- |
-|1| my account form has the correct validation|Pass| a user must fully enter all details corretly before the form is submitted|
+|1| my account form has the correct validation|Pass| a user must fully enter all details correctly before the form is submitted|
 
 ![my account](media/readme-media/features/MyAccountForm.png)
 
 ### Create Booking
 |Test #|Test|Results|Evidence|
 | --- | --- | --- |--- |
-|1|create booking form has the correct validation|Pass| a user must fully enter all details corretly before the booking is created|
+|1|create booking form has the correct validation|Pass| a user must fully enter all details correctly before the booking is created|
 |2|users cannot double book on sessions|Pass| days which are already booked are greyed out and not bookable|
 
 ![create booking](media/readme-media/features/CreateBookingForm.png)
@@ -141,7 +141,7 @@ https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&
 ![css validation](media/readme-media/testing/CSSValidator.png)
 
 ### Javascript
-- I used minimal Javascript but all scripts used passed through JSHint with no errors.
+- I used minimal Javascript but all scripts used was validated with JSHint, showing no errors.
 
 ### Python
 
