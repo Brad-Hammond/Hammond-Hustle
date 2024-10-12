@@ -225,6 +225,31 @@ Below are the main features of Hammond Hustle.
 ![admin booking](media/readme-media/features/AdminYourBooking.png)
 
 
+### Future Features
+#### Leave and View Feedback
+- This was a feature which I wanted to implement however it fell out of scope due to time constraints.
+- This feature would allow employees to leave feedback on the session for users and then users could view this feedback.
 
+#### Coach Videos
+- This feature would have a section on the page of coaches going over some basic tips and tricks.
+- Due to time constraints I could not implement this feature but it will be added in the future.
 
+#### Profile Pictures
+- This feature would allow users to upload a profile picture to the site.
+- Due to time constraints I could not implement this feature but it will be added in the future.
 
+***
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- Python
+- Javascript
+- django-allauth
+- django-crispy-forms
+- Postgre
+
+## Testing / User Stories
+
+A separate testing document has been created as [TESTING.md](TESTING.md)
