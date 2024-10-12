@@ -13,22 +13,24 @@
 <body>
     <header>
         <div class="logo">
-            <h1>Hammond Hustle</h1>
+          <h1>Hammond Hustle</h1>
         </div>
-        <nav>
-            <ul>
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#team-section">Trainers</a></li>
-              {% if user.is_authenticated %}
-              <li><a href="{% url 'my_account' %}">My Account</a></li>
-              <li><a href="{% url 'logout' %}">Log Out</a></li>
-              {% else %}
-              <li><a href="{% url 'login' %}">Log In</a></li>
-              {% endif %}
-            </ul>
-          </nav>
-    </header>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="nav-menu">
+          <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#about-section">About Us</a></li>
+            <li><a href="#team-section">Trainers</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </header>
 
     <section class="manage-bookings-section" id="color-black">
         {% if is_admin %}
@@ -100,5 +102,11 @@
             <a href="{% url 'create_booking' %}" class="new-booking-btn">Make a New Booking</a>
         </div>
     </section>
+    <script>
+        function toggleMenu() {
+          const menu = document.getElementById("nav-menu");
+          menu.classList.toggle("active");
+        }
+      </script>
 </body>
 </html>

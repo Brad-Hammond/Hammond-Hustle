@@ -23,18 +23,18 @@
       <div class="logo">
         <h1>Hammond Hustle</h1>
       </div>
-      <nav>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav id="nav-menu">
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="#about-us">About Us</a></li> <!-- Ensure the ID in the section matches -->
-          <li><a href="#team-section">Trainers</a></li> <!-- Anchor link to Team Section -->
-      
+          <li><a href="#about-section">About Us</a></li>
+          <li><a href="#team-section">Trainers</a></li>
           {% if user.is_authenticated %}
-            <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li> <!-- "Your Bookings" link -->
-            <li><a href="{% url 'my_account' %}">My Account</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
+          <li><a href="{% url 'my_account' %}">My Account</a></li>
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
-            <li><a href="{% url 'login' %}">Log In</a></li>
+          <li><a href="{% url 'login' %}">Log In</a></li>
           {% endif %}
         </ul>
       </nav>
@@ -74,12 +74,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
     <script>
+      function toggleMenu() {
+        const menu = document.getElementById("nav-menu");
+        menu.classList.toggle("active");
+      }
+
+      // Flatpickr for Date of Birth input field
       flatpickr("#date_of_birth", {
         dateFormat: "F j, Y",
         maxDate: "today",
         altInput: true,
         altFormat: "F j, Y",
       });
-    </script>
+  </script>
   </body>
 </html>

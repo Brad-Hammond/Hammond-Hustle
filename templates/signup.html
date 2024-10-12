@@ -19,13 +19,14 @@
       <div class="logo">
         <h1>Hammond Hustle</h1>
       </div>
-      <nav>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav id="nav-menu">
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="#about-section">About Us</a></li>
           <li><a href="#team-section">Trainers</a></li>
-          <!-- Anchor link to Team Section -->
           {% if user.is_authenticated %}
+          <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li>
           <li><a href="{% url 'my_account' %}">My Account</a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
@@ -35,17 +36,44 @@
       </nav>
     </header>
 
-    <div id="color-black">
-      <section class="form-section">
-        <h2>Signup</h2>
-        <form method="POST" action="{% url 'signup' %}">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit" class="btn">Sign Up</button>
-        </form>
-        <p>
-          Already have an account? <a href="{% url 'login' %}">Log in here</a>.
-        </p>
-      </section>
-    </div>
+    <!-- Signup Form Container -->
+    <section class="signup-form">
+      <h2>Signup</h2>
+      <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <small class="helptext">Required. 150 characters or fewer. Letters, digits, and @/./+/-/_ only.</small>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <ul>
+          <li>Your password can’t be too similar to your other personal information.</li>
+          <li>Your password must contain at least 8 characters.</li>
+          <li>Your password can’t be a commonly used password.</li>
+          <li>Your password can’t be entirely numeric.</li>
+        </ul>
+
+        <label for="password_confirmation">Password confirmation:</label>
+        <input type="password" name="password_confirmation" required>
+        <small class="helptext">Enter the same password as before, for verification.</small>
+
+        <label for="code">Code:</label>
+        <input type="text" name="code">
+        <small class="helptext">Enter your code if you are an employee.</small>
+
+        <button type="submit" class="btn">Sign Up</button>
+      </form>
+      <p>
+        Already have an account? <a href="{% url 'login' %}">Log in here</a>.
+      </p>
+    </section>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("nav-menu");
+        menu.classList.toggle("active");
+      }
+    </script>
   </body>
 </html>
