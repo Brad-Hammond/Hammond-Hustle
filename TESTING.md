@@ -90,6 +90,37 @@ Manual testing occurred regularly throughout local development. Tests are docume
 
 [User story 10] - I know I am done with the 'As a employee I can mark a booking as completed so that the employee knows the booking is completed' user story when as a employee I can see and press the mark as completed button - PASS
 
+***
 
+## Code Validation
 
+### HTML
 
+#### Index
+![index html](media/readme-media/testing/HTMLCodeCheckBase.png)
+
+#### Signup
+![signup html](media/readme-media/testing/HTMLCodeCheckSingup.png)
+
+#### Login
+![login html](media/readme-media/testing/HTMLCodeCheckLogin.png)
+
+#### My Account
+![my account html](media/readme-media/testing/HTMLCodeCheckMyAccount.png)
+
+#### Create Booking
+![create booking html](media/readme-media/testing/HTMLCodeCheckCreateBooking.png)
+
+#### Your Booking
+![your booking html](media/readme-media/testing/HTMLCodeCheckYourBooking.png)
+
+#### Edit Booking
+![edit booking html](media/readme-media/testing/HTMLCodeCheckEditBooking.png)
+
+### CSS
+
+![css validation](media/readme-media/testing/CSSValidator.png)
+
+### Javascript
+
+### Python
