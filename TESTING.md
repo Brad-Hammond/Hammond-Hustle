@@ -1,6 +1,11 @@
-
+# Hammond Hustle
 
 [<< Back to ReadMe](README.md)
+
+I have 3 tests covering the critical views and functionalities of my site.
+![test results](media/readme-media/testing/AutomatedTestImage.png)
+
+***
 
 ## Manual Tests
 Manual testing occurred regularly throughout local development. Tests are documented below.
@@ -66,6 +71,13 @@ Manual testing occurred regularly throughout local development. Tests are docume
 ![edit booking](media/readme-media/features/EditBookingForm.png)
 ![edit booking greyed](media/readme-media/features/EditBookingDateGreyed.png)
 
+### Other Manual Tests
+- I have checked each different access level (user, employee, admin) to make sure each one can only see what they are supposed to.
+- Users can see the bare minimum, only being able to create, read, edit and delete bookings.
+- Employees can do all of the above + approve, reject and mark a session as completed.
+- Admins have views of all bookings with CRUD functionality.
+- Users cannot see what the employees can see, employees cannot see what the admin can see.
+
 ## User Story Testing
 
 [Project Stories](https://github.com/users/Brad-Hammond/projects/2)
@@ -98,30 +110,38 @@ Manual testing occurred regularly throughout local development. Tests are docume
 
 #### Index
 ![index html](media/readme-media/testing/HTMLCodeCheckBase.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2F#l441c6
 
 #### Signup
 ![signup html](media/readme-media/testing/HTMLCodeCheckSingup.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Fbookings%2Fsignup%2F#l441c6
 
 #### Login
 ![login html](media/readme-media/testing/HTMLCodeCheckLogin.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Faccounts%2Flogin%2F#l441c6
 
 #### My Account
 ![my account html](media/readme-media/testing/HTMLCodeCheckMyAccount.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Fbookings%2Fmy_account%2F#l441c6
 
 #### Create Booking
 ![create booking html](media/readme-media/testing/HTMLCodeCheckCreateBooking.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Fbookings%2Fcreate_booking%2F#l441c6
 
 #### Your Booking
 ![your booking html](media/readme-media/testing/HTMLCodeCheckYourBooking.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Fbookings%2Fmanage_bookings%2F#l441c6
 
 #### Edit Booking
 ![edit booking html](media/readme-media/testing/HTMLCodeCheckEditBooking.png)
+https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Fhammond-hustle-6962877d2ab9.herokuapp.com%2Fbookings%2Fedit_booking%2F49%2F#l441c6
 
 ### CSS
 
 ![css validation](media/readme-media/testing/CSSValidator.png)
 
 ### Javascript
+- I used minimal Javascript but all scripts used passed through JSHint with no errors.
 
 ### Python
 
@@ -138,3 +158,36 @@ Manual testing occurred regularly throughout local development. Tests are docume
 #### views.py
 ![views](media/readme-media/testing/CIPLinterViews.png)
 
+## Lighthouse/ Accessibility Testing
+
+### Index
+![lighthouse-index](media/readme-media/testing/IndexLighthouse.png)
+
+### Login
+![lighthouse-login](media/readme-media/testing/LoginLighthouse.png)
+
+### Signup
+![lighthouse-signup](media/readme-media/testing/SignupLighthouse.png)
+
+### My Account
+![lighthouse-my-account](media/readme-media/testing/MyAccountLighthouse.png)
+
+### Your Booking
+![lighthouse-your-booking](media/readme-media/testing/YourBookingLighthouse.png)
+
+### Edit Booking
+![lighthouse-edit-booking](media/readme-media/testing/EditBookingsLighthouse.png)
+
+## Devices used for manual testing
+What's Cooking was tested using the following desktop and mobile browsers:
+
+### Desktop
+- Safari 18.0
+- Firefox 131.0.2
+- Chrome 129.0.6668.100
+
+### Mobile and Tablet
+- Safari iOS 18
+- Chrome 129.0.6668.100 for Android
+
+[<< Back to ReadMe](README.md)
