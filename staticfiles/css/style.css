@@ -196,7 +196,7 @@ nav ul li a:hover {
 .form-section button {
   padding: 10px;
   font-size: 1rem;
-  background-color: #ff6347;
+  background-color:  #c45210;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -206,7 +206,7 @@ nav ul li a:hover {
 }
 
 .form-section button:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 .form-section p {
@@ -285,7 +285,7 @@ nav ul li a:hover {
   padding: 12px;
   font-size: 1rem;
   font-weight: bold;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   text-transform: uppercase;
   border: none;
@@ -295,7 +295,7 @@ nav ul li a:hover {
 }
 
 .signup-form button[type="submit"]:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 /* Login Link */
@@ -351,7 +351,7 @@ nav ul li a:hover {
   margin-top: 20px;
   padding: 10px;
   font-size: 1rem;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -362,7 +362,7 @@ nav ul li a:hover {
 }
 
 .booking-form-section .btn:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 /* === Manage Bookings Section === */
@@ -407,7 +407,7 @@ nav ul li a:hover {
 .manage-bookings-section button {
   padding: 5px 10px;
   font-size: 0.9rem;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -417,7 +417,7 @@ nav ul li a:hover {
 }
 
 .manage-bookings-section button:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 .manage-bookings-section p {
@@ -428,7 +428,7 @@ nav ul li a:hover {
 .manage-bookings-section .new-booking-btn {
   display: inline-block;
   padding: 15px 30px;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -440,7 +440,7 @@ nav ul li a:hover {
 }
 
 .manage-bookings-section .new-booking-btn:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 /* === My Account Section === */
@@ -466,7 +466,7 @@ nav ul li a:hover {
 .account-section button {
   padding: 10px;
   font-size: 1rem;
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -476,9 +476,8 @@ nav ul li a:hover {
 }
 
 .account-section button:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30
 }
-
 /* === Team Section === */
 .team-section {
   background: linear-gradient(
@@ -581,7 +580,7 @@ nav ul li a:hover {
 
 /* === Cancel Button Styling === */
 .cancel-button {
-  background-color: #ff6347;
+  background-color: #c45210;
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
@@ -593,7 +592,7 @@ nav ul li a:hover {
 }
 
 .cancel-button:hover {
-  background-color: #ff7f50;
+  background-color: #d96b30;
 }
 
 /* === Responsive Adjustments for Smaller Screens === */
