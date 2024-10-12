@@ -77,7 +77,7 @@ nav ul li a:hover {
   }
 
   #nav-menu {
-    display: none; /* Hide by default on mobile */
+    display: none; /* Hide menu by default on mobile */
     position: absolute;
     top: 100%;
     left: 0;
@@ -220,6 +220,97 @@ nav ul li a:hover {
 }
 
 .form-section a:hover {
+  text-decoration: underline;
+}
+
+/* Signup Form Container */
+.signup-form {
+  max-width: 400px;
+  margin: auto;
+  background-color: #111;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  text-align: center;
+}
+
+/* Form Labels */
+.signup-form label {
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Align labels to the left */
+}
+
+/* Input Fields */
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #333;
+  margin-bottom: 15px;
+}
+
+/* Code Input Field */
+.signup-form input[name="code"] {
+  margin-bottom: 20px; /* Add more space for the employee code field */
+}
+
+/* Form Descriptions (Helper Text) */
+.signup-form .helptext {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Password Requirements List */
+.signup-form ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* Submit Button */
+.signup-form button[type="submit"] {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ff6347;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup-form button[type="submit"]:hover {
+  background-color: #ff7f50;
+}
+
+/* Login Link */
+.signup-form p {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.signup-form a {
+  color: #ff6347;
+  text-decoration: none;
+}
+
+.signup-form a:hover {
   text-decoration: underline;
 }
 
@@ -534,6 +625,23 @@ nav ul li a:hover {
   .team-member {
     width: 100%;
   }
+  /* Sign up form */
+
+  .signup-form {
+    max-width: 90%;
+    padding: 30px;
+  }
+  .signup-form label {
+    font-size: 0.95rem;
+  }
+  .signup-form .helptext,
+  .signup-form ul {
+    font-size: 0.85rem;
+  }
+  .signup-form button[type="submit"] {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -556,5 +664,23 @@ nav ul li a:hover {
   .hero-text .btn {
     padding: 10px 20px;
     font-size: 14px;
+  }
+}
+/* Mobile devices */
+@media (max-width: 480px) {
+  /* Sign up form */
+  .signup-form {
+    padding: 20px;
+  }
+  .signup-form label {
+    font-size: 0.9rem;
+  }
+  .signup-form .helptext,
+  .signup-form ul {
+    font-size: 0.8rem;
+  }
+  .signup-form button[type="submit"] {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }
