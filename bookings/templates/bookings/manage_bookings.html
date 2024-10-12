@@ -20,7 +20,6 @@
               <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="#">About Us</a></li>
               <li><a href="#team-section">Trainers</a></li>
-              <!-- Anchor link to Team Section -->
               {% if user.is_authenticated %}
               <li><a href="{% url 'my_account' %}">My Account</a></li>
               <li><a href="{% url 'logout' %}">Log Out</a></li>
@@ -38,7 +37,7 @@
                 {% for booking in bookings %}
                     <li>
                         Session: {{ booking.session_time }} - Status: {{ booking.status }} - User: {{ booking.user.username }}
-                        - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link for admin -->
+                        - <a href="{% url 'edit_booking' booking.id %}">Edit</a>
                         - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
                     </li>
                 {% endfor %}
@@ -69,7 +68,6 @@
                     {% for booking in approved_bookings %}
                         <li>
                             Session: {{ booking.session_time }} - Approved
-                            <!-- Mark as Completed form for employees -->
                             <form action="{% url 'mark_completed' booking.id %}" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit">Mark as Completed</button>
@@ -88,7 +86,7 @@
                     {% for booking in bookings %}
                         <li>
                             Session: {{ booking.session_time }} - Status: {{ booking.status }}
-                            - <a href="{% url 'edit_booking' booking.id %}">Edit</a> <!-- Edit link for users -->
+                            - <a href="{% url 'edit_booking' booking.id %}">Edit</a>
                             - <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?');">Delete</a>
                         </li>
                     {% endfor %}
@@ -97,8 +95,9 @@
                 <p>You have no current bookings.</p>
             {% endif %}
         {% endif %}
+        
         <div style="text-align: center; margin-top: 20px;">
-            <a href="{% url 'create_booking' %}" class="btn">Make a New Booking</a>
+            <a href="{% url 'create_booking' %}" class="new-booking-btn">Make a New Booking</a>
         </div>
     </section>
 </body>
