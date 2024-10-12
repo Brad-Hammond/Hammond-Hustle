@@ -1,4 +1,4 @@
-/* Reset and basic styles */
+/* === Reset and Basic Styles === */
 * {
   margin: 0;
   padding: 0;
@@ -15,58 +15,31 @@ body {
   align-items: center;
   justify-content: center;
 }
-/* === Fixed Navbar Styles (Add this section to make the navbar constant) === */
+
+/* === Header and Navbar === */
 header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #000; /* Background color to cover content behind */
-  padding: 20px 50px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo h1 {
-  font-size: 24px;
-  letter-spacing: 2px;
-  color: #fff;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-nav ul li a:hover {
-  color: #ff6347;
-}
-
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  width: 100%;
   background-color: #000;
+  padding: 20px 50px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo h1 {
   font-size: 24px;
   letter-spacing: 2px;
   color: #fff;
+}
+
+/* === Navigation Menu Styling (Desktop) === */
+#nav-menu {
+  display: flex;
+  gap: 20px;
 }
 
 nav ul {
@@ -87,13 +60,52 @@ nav ul li a:hover {
   color: #ff6347;
 }
 
-/* Hero section */
+/* === Toggle Button (for Mobile) === */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* === Responsive Navigation (Mobile) === */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #nav-menu {
+    display: none; /* Hide menu by default on mobile */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  #nav-menu.active {
+    display: flex; /* Show menu when active */
+  }
+
+  #nav-menu ul {
+    flex-direction: column;
+  }
+}
+
+/* === Hero Section === */
 .hero {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: url("/static/images/HeroImage.jpg") no-repeat center center/cover;
+  background: url("/static/images/HeroImage-min.jpg") no-repeat center
+    center/cover;
   position: relative;
   height: 100vh;
 }
@@ -137,6 +149,7 @@ nav ul li a:hover {
   font-size: 16px;
 }
 
+/* === Hero Image Styling === */
 .hero-image {
   position: absolute;
   right: 0;
@@ -147,7 +160,7 @@ nav ul li a:hover {
   z-index: 1;
 }
 
-/* Login and Signup form styles */
+/* === Login and Signup Form Section === */
 #color-black {
   background-color: #111;
   padding: 50px;
@@ -210,7 +223,98 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Booking form section styles */
+/* Signup Form Container */
+.signup-form {
+  max-width: 400px;
+  margin: auto;
+  background-color: #111;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.4);
+  text-align: center;
+}
+
+/* Form Labels */
+.signup-form label {
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Align labels to the left */
+}
+
+/* Input Fields */
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #333;
+  margin-bottom: 15px;
+}
+
+/* Code Input Field */
+.signup-form input[name="code"] {
+  margin-bottom: 20px; /* Add more space for the employee code field */
+}
+
+/* Form Descriptions (Helper Text) */
+.signup-form .helptext {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Password Requirements List */
+.signup-form ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* Submit Button */
+.signup-form button[type="submit"] {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ff6347;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup-form button[type="submit"]:hover {
+  background-color: #ff7f50;
+}
+
+/* Login Link */
+.signup-form p {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.signup-form a {
+  color: #ff6347;
+  text-decoration: none;
+}
+
+.signup-form a:hover {
+  text-decoration: underline;
+}
+
+/* === Booking Form Section === */
 .booking-form-section {
   max-width: 600px;
   margin: auto;
@@ -233,11 +337,8 @@ nav ul li a:hover {
   display: block;
 }
 
-.booking-form-section input[type="text"],
-.booking-form-section input[type="email"],
-.booking-form-section input[type="tel"],
-.booking-form-section select,
-.booking-form-section input[type="password"] {
+.booking-form-section input,
+.booking-form-section select {
   padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
@@ -264,18 +365,7 @@ nav ul li a:hover {
   background-color: #ff7f50;
 }
 
-.booking-form-section h3 {
-  color: #fff;
-  margin-top: 30px;
-  text-align: center;
-}
-
-.booking-form-section ul {
-  margin-top: 10px;
-  color: #ccc;
-}
-
-/* Manage bookings section */
+/* === Manage Bookings Section === */
 .manage-bookings-section {
   max-width: 600px;
   margin: auto;
@@ -334,8 +424,26 @@ nav ul li a:hover {
   color: #ccc;
   text-align: center;
 }
+/* Make a New Booking Button Styling */
+.manage-bookings-section .new-booking-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #ff6347;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
 
-/* My Account page styles */
+.manage-bookings-section .new-booking-btn:hover {
+  background-color: #ff7f50;
+}
+
+/* === My Account Section === */
 .account-section {
   background-color: #111;
   padding: 50px;
@@ -370,7 +478,8 @@ nav ul li a:hover {
 .account-section button:hover {
   background-color: #ff7f50;
 }
-/* Team Section */
+
+/* === Team Section === */
 .team-section {
   background: linear-gradient(
     to bottom,
@@ -397,23 +506,22 @@ nav ul li a:hover {
   margin: 0 auto 40px;
 }
 
-/* Team Grid */
 .team-grid {
   display: flex;
   gap: 20px;
   justify-content: center;
   padding: 0 20px;
-  flex-wrap: wrap; /* Ensures responsiveness */
+  flex-wrap: wrap;
 }
 
-/* Team Member Styles */
+/* === Team Member Styling === */
 .team-member {
   background-color: #111;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
   color: #fff;
-  width: calc(33.333% - 40px); /* Three columns with spacing */
+  width: calc(33.333% - 40px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -435,22 +543,16 @@ nav ul li a:hover {
   margin-bottom: 5px;
 }
 
-.team-member p {
-  font-size: 1rem;
-  color: #ccc;
-}
-
-/* About Us Section */
+/* === About Us Section === */
 .about-us {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: url("/static/images/AboutUsImage.jpg") no-repeat center
+  background: url("/static/images/AboutUsImage-min.jpg") no-repeat center
     center/cover;
   position: relative;
   height: 100vh;
-  margin-top: -5px;
   overflow: hidden;
 }
 
@@ -460,8 +562,6 @@ nav ul li a:hover {
   z-index: 2;
   color: #fff;
   text-align: left;
-  position: relative;
-  left: 5%; /* Adjusts the text further to the left */
 }
 
 .about-text h2 {
@@ -470,7 +570,6 @@ nav ul li a:hover {
   line-height: 1.1;
   font-weight: bold;
   text-transform: uppercase;
-  color: #fff;
 }
 
 .about-text p {
@@ -480,27 +579,31 @@ nav ul li a:hover {
   max-width: 90%;
 }
 
-.about-image {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
-  z-index: 1;
+/* === Cancel Button Styling === */
+.cancel-button {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
 }
 
-.about-us::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 20%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
-  z-index: 1;
+.cancel-button:hover {
+  background-color: #ff7f50;
 }
-/* Responsive Styling */
+
+/* === Responsive Adjustments for Smaller Screens === */
+@media (max-width: 1024px) {
+  .hero-text {
+    max-width: 80%;
+    padding: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .about-us {
     flex-direction: column;
@@ -508,132 +611,36 @@ nav ul li a:hover {
     padding: 20px;
   }
 
-  .about-us-text {
+  .about-text {
     max-width: 100%;
     text-align: center;
     padding: 20px;
   }
 
-  .about-us-image {
+  .about-image {
     width: 100%;
     height: 50vh;
   }
 
-  .about-us h2 {
-    font-size: 2rem;
-  }
-
-  .about-us p {
-    font-size: 1rem;
-  }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-  /* Fixed Navbar Styles */
-  header {
-    position: fixed;
-    top: 0;
+  .team-member {
     width: 100%;
-    z-index: 1000;
-    background-color: #000; /* Keep background color to cover the content behind */
-    padding: 20px 50px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
   }
+  /* Sign up form */
 
-  body {
-    margin: 0;
-    padding-top: 80px; /* Add padding equal to navbar height to prevent overlap */
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logo h1 {
-    font-size: 24px;
-    letter-spacing: 2px;
-    color: #fff;
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-
-  nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-  }
-
-  nav ul li a:hover {
-    color: #ff6347;
-  }
-  .team-member {
-    width: calc(50% - 20px); /* Two columns on medium screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .team-member {
-    width: 100%; /* Single column on smaller screens */
-  }
-}
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .hero-text {
-    max-width: 80%;
-    padding: 20px;
-  }
-
-  .hero-text h2 {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .logo h1 {
-    font-size: 20px;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .hero {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-  }
-
-  .hero-text h2 {
-    font-size: 2rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  .booking-form-section,
-  .manage-bookings-section,
-  .account-section,
-  #color-black {
-    width: 90%;
+  .signup-form {
+    max-width: 90%;
     padding: 30px;
+  }
+  .signup-form label {
+    font-size: 0.95rem;
+  }
+  .signup-form .helptext,
+  .signup-form ul {
+    font-size: 0.85rem;
+  }
+  .signup-form button[type="submit"] {
+    padding: 10px;
+    font-size: 0.95rem;
   }
 }
 
@@ -657,5 +664,23 @@ nav ul li a:hover {
   .hero-text .btn {
     padding: 10px 20px;
     font-size: 14px;
+  }
+}
+/* Mobile devices */
+@media (max-width: 480px) {
+  /* Sign up form */
+  .signup-form {
+    padding: 20px;
+  }
+  .signup-form label {
+    font-size: 0.9rem;
+  }
+  .signup-form .helptext,
+  .signup-form ul {
+    font-size: 0.8rem;
+  }
+  .signup-form button[type="submit"] {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }
