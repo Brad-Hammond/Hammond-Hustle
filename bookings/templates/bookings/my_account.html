@@ -26,9 +26,16 @@
       <nav>
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'create_booking' %}">Make a Booking</a></li>
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
-          <li><a href="{% url 'my_account' %}">My Account</a></li>
+          <li><a href="#about-us">About Us</a></li> <!-- Ensure the ID in the section matches -->
+          <li><a href="#team-section">Trainers</a></li> <!-- Anchor link to Team Section -->
+      
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'manage_bookings' %}">Your Bookings</a></li> <!-- "Your Bookings" link -->
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </nav>
     </header>
