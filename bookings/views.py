@@ -25,7 +25,7 @@ def home(request):
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        
+
         if form.is_valid():
             user = form.save(commit=False)
             password = form.cleaned_data['password1']
@@ -46,7 +46,7 @@ def signup(request):
 
             # Authenticate and log in the user
             user = authenticate(username=user.username, password=password)
-            
+
             if user is not None:
                 login(request, user)
                 return redirect('home')
@@ -56,7 +56,7 @@ def signup(request):
 
         else:
             messages.error(request, "Signup failed. Please check the form.")
-            print("Signup form errors:", form.errors)  # Debugging output in terminal
+            print("Signup form errors:", form.errors)
 
     else:
         form = CustomUserCreationForm()
