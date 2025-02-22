@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -25,19 +25,42 @@ def home(request):
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+        
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            password = form.cleaned_data['password1']
+            user.set_password(password)
+            user.save()
+
             code = form.cleaned_data.get('code')
+
+            # Get or create user groups
             employees_group, _ = Group.objects.get_or_create(name='Employees')
             users_group, _ = Group.objects.get_or_create(name='Users')
+
+            # Assign user to the correct group
             if code == 'EMPLOYEE2024':
                 user.groups.add(employees_group)
             else:
                 user.groups.add(users_group)
-            login(request, user)
-            return redirect('home')
+
+            # Authenticate and log in the user
+            user = authenticate(username=user.username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, "Authentication failed after signup.")
+                print("Authentication failed for user:", user.username)
+
+        else:
+            messages.error(request, "Signup failed. Please check the form.")
+            print("Signup form errors:", form.errors)  # Debugging output in terminal
+
     else:
         form = CustomUserCreationForm()
+
     return render(request, 'signup.html', {'form': form})
 
 
