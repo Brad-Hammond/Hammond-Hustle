@@ -21,7 +21,6 @@ def home(request):
 
 
 # User signup view
-
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -65,10 +64,8 @@ def signup(request):
 
 
 # Manage bookings view
-
 @login_required
 def manage_bookings(request):
-    # Initialize variables to avoid UnboundLocalError
     bookings, pending_bookings, approved_bookings = None, None, None
 
     # Check for user roles
@@ -96,6 +93,8 @@ def manage_bookings(request):
         bookings = Booking.objects.filter(
             coach=request.user.username, status__in=["Pending", "Approved"]
         )
+        pending_bookings = bookings.filter(status="Pending")
+        approved_bookings = bookings.filter(status="Approved")
 
     # Fallback if user has no specific group or permissions
     else:
@@ -163,6 +162,12 @@ def booking_confirmation(request, booking_id):
 @login_required
 def accept_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+
+    # Check if the coach assigned to the booking is the same as the logged-in user
+    if booking.coach != request.user.username and not request.user.groups.filter(name="Admin").exists():
+        messages.error(request, "You do not have permission to accept this booking.")
+        return redirect('manage_bookings')
+
     booking.status = 'Accepted'
     booking.save()
     return redirect('manage_bookings')
@@ -172,14 +177,25 @@ def accept_booking(request, booking_id):
 @login_required
 def approve_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+
+    # Ensure that only the coach assigned or admin can approve/reject
+    if booking.coach != request.user.username and not request.user.groups.filter(name="Admin").exists():
+        messages.error(request, "You do not have permission to approve/reject this booking.")
+        return redirect('manage_bookings')
+
     if request.method == 'POST':
         action = request.POST.get('action')
-        booking.status = 'Approved' if action == 'approve' else 'Rejected'
+        # Set booking status based on the action (approve or reject)
+        if action == 'approve':
+            booking.status = 'Approved'
+        elif action == 'reject':
+            booking.status = 'Rejected'
         booking.save()
         return redirect('manage_bookings')
+
     return render(
         request, 'bookings/approve_booking.html', {'booking': booking}
-        )
+    )
 
 
 # My account view
@@ -207,6 +223,7 @@ def my_account(request):
 @login_required
 def mark_completed(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+
     if booking.status == 'Approved':
         booking.status = 'Completed'
         booking.save()
@@ -227,13 +244,7 @@ def edit_booking(request, booking_id):
         request.user.is_superuser or request.user.is_staff or
         request.user.groups.filter(name="Admin").exists()
     )
-    # Debugging: Log user status and permissions for troubleshooting
-    print(
-        f"User: {request.user.username}, ",
-        f"Superuser: {request.user.is_superuser}, ",
-        f"Staff: {request.user.is_staff}, ",
-        f"Admin Group: {is_admin}"
-    )
+
     # Only allow edit if the user is the booking owner or an admin
     if booking.user != request.user and not is_admin:
         messages.error(
