@@ -316,6 +316,8 @@ flatpickr("#session_time", {
 ## Important Note
 - The secret key has been regenerated and put in my env.py file which is hidded.
 - The secret key in earlier deployment is no longer valid as it has been regenerated.
+- I have regenerated the secret key twice, so the key in earlier deployement and commits is no longer in use.
+- I used [Djecrety](https://djecrety.ir/) to generate my new secret keys.
 
 ## Deployment
 ### Cloning & Forking
