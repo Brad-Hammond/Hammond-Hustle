@@ -313,11 +313,12 @@ flatpickr("#session_time", {
 </script>
 ```
 
-## Important Note
+## Important Note // Please Read
 - The secret key has been regenerated and put in my env.py file which is hidded.
 - The secret key in earlier deployment is no longer valid as it has been regenerated.
 - I have regenerated the secret key twice, so the key in earlier deployement and commits is no longer in use.
 - I used [Djecrety](https://djecrety.ir/) to generate my new secret keys.
+- All employee logins have been made so this cannot be done again - however I have supplied all of their login details when submitting.
 
 ## Deployment
 ### Cloning & Forking
