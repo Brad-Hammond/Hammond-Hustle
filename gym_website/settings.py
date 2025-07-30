@@ -29,6 +29,12 @@ LOGOUT_REDIRECT_URL = '/'  # Redirects to the homepage URL
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY environment variable not set!")
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://hammond-hustle-6962877d2ab9.herokuapp.com',
+]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
